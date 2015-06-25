@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainVC: BaseVC {
+class MainVC: BaseVC , UIScrollViewDelegate{
     
     @IBOutlet weak var tab01Btn: UIButton!
     @IBOutlet weak var tab02Btn: UIButton!
@@ -20,20 +20,22 @@ class MainVC: BaseVC {
     var tabBarBtns : [UIButton] = []
     
     
-    
-    override func viewDidLoad() {
+    // 뷰가 로드된 후 초기 뷰들 배치
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
         setTopTitlelabelString("에듀밴스")
         initTabbar()
-        self.mainScrollView.contentSize = self.mainContainerView.frame.size
-        
-        // Do any additional setup after loading the view.
+
+
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
+    // 뷰가 모두 배치되고 난 다음 마지막에 스크롤 컨텐츠 사이즈 부여
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        self.mainScrollView.contentSize = self.mainContainerView.frame.size
+        self.changeTabWithIndex(1)
     }
     
     
@@ -47,17 +49,16 @@ class MainVC: BaseVC {
     {
         self.tabBarBtns = [tab01Btn,tab02Btn,tab03Btn,tab04Btn]
 
-        var tabbarIndex = 0
-        for oneTabBtn in self.tabBarBtns
+
+        for (index, oneTabBtn) in enumerate(self.tabBarBtns)
         {
             oneTabBtn.setTitleColor(ConstantValues.color01_white, forState: UIControlState.Normal)
             oneTabBtn.setTitleColor(ConstantValues.color_main06_32_60_102, forState: UIControlState.Selected)
             oneTabBtn.setTitleColor(ConstantValues.color_main06_32_60_102, forState: UIControlState.Highlighted)
             oneTabBtn.titleLabel?.font = UIFont.boldSystemFontOfSize(13)
             oneTabBtn.backgroundColor = ConstantValues.color_main04_134_156_190
-            oneTabBtn.tag = tabbarIndex
-            tabbarIndex++
-            
+            oneTabBtn.tag = index
+            println("인덱스 : \(index)")
             oneTabBtn.addTarget(self, action: "onTabTouchUpInside:", forControlEvents: UIControlEvents.TouchUpInside)
         }
         
@@ -65,15 +66,36 @@ class MainVC: BaseVC {
     
     func onTabTouchUpInside(sender : UIButton)
     {
+        self.changeTabWithIndex(sender.tag)
+    }
+    
+    
+    
+    func changeTabWithIndex( index : Int)
+    {
+        
         for oneBtn in self.tabBarBtns
         {
             oneBtn.selected = false
         }
-        sender.selected = true
+        
+        self.tabBarBtns[index].selected = true
+        
+        println("들어온 인덱스 확인 : \(index)")
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
+        })
+
     }
     
 
     
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView)
+    {
+        let currentPageIndex  = Int(scrollView.contentOffset.x / self.view.frame.size.width)
+        
+        self.changeTabWithIndex(currentPageIndex)
+    }
     
-    
+
 }

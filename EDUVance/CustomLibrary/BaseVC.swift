@@ -95,7 +95,9 @@ class BaseVC: UIViewController
 
     }
     
-    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
 
     
         

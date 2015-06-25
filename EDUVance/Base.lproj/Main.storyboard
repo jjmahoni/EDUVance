@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--LoginVC-->
@@ -346,6 +347,12 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6w-ZI-uHH">
+                                        <rect key="frame" x="150" y="0.0" width="150" height="54"/>
+                                        <state key="normal" title="정보">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUC-2t-9LA">
                                         <rect key="frame" x="300" y="0.0" width="150" height="54"/>
                                         <state key="normal" title="강의실">
@@ -355,12 +362,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCH-mF-IWa">
                                         <rect key="frame" x="450" y="0.0" width="150" height="54"/>
                                         <state key="normal" title="출석">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6w-ZI-uHH">
-                                        <rect key="frame" x="150" y="0.0" width="150" height="54"/>
-                                        <state key="normal" title="정보">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -399,30 +400,64 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-0b-udw" userLabel="메인 스크롤뷰">
                                 <rect key="frame" x="0.0" y="48" width="600" height="498"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-Lz-7V1" userLabel="스크롤속 컨테이너뷰">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-Lz-7V1" userLabel="스크롤속 컨테이너뷰">
                                         <rect key="frame" x="0.0" y="0.0" width="2400" height="498"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-4A-P9V" userLabel="1번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-4A-P9V" userLabel="1번 뷰">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="0.95091450889999996" green="1" blue="0.45895097639999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OuD-wu-Wn5" userLabel="2번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuD-wu-Wn5" userLabel="2번 뷰">
                                                 <rect key="frame" x="600" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="0.64189266040000004" green="1" blue="0.8762482399" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-x2-sDJ" userLabel="3번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-x2-sDJ" userLabel="3번 뷰">
                                                 <rect key="frame" x="1200" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="0.4293826892" green="0.62829571500000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qrb-Cc-cZM" userLabel="4번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrb-Cc-cZM" userLabel="4번 뷰">
                                                 <rect key="frame" x="1800" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="1" green="0.11551448679301834" blue="0.789173376344663" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.62275337289999999" green="0.86760562640000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="height" secondItem="OuD-wu-Wn5" secondAttribute="height" id="2dr-1H-nDs"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="width" secondItem="CCB-x2-sDJ" secondAttribute="width" id="6Xh-hF-UHB"/>
+                                            <constraint firstItem="Qrb-Cc-cZM" firstAttribute="top" secondItem="nnR-Lz-7V1" secondAttribute="top" id="7jE-JI-FsQ"/>
+                                            <constraint firstItem="Qrb-Cc-cZM" firstAttribute="leading" secondItem="CCB-x2-sDJ" secondAttribute="trailing" id="DDB-cF-DKr"/>
+                                            <constraint firstAttribute="bottom" secondItem="Qrb-Cc-cZM" secondAttribute="bottom" id="GkQ-bd-sNe"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="width" secondItem="Qrb-Cc-cZM" secondAttribute="width" id="PP9-X7-ecv"/>
+                                            <constraint firstItem="OuD-wu-Wn5" firstAttribute="top" secondItem="nnR-Lz-7V1" secondAttribute="top" id="WoX-9t-1nu"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="height" secondItem="CCB-x2-sDJ" secondAttribute="height" id="avF-Ym-m6x"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="width" secondItem="OuD-wu-Wn5" secondAttribute="width" id="c8g-wq-6Qi"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="leading" secondItem="nnR-Lz-7V1" secondAttribute="leading" id="cKC-Ow-gr4"/>
+                                            <constraint firstItem="CCB-x2-sDJ" firstAttribute="leading" secondItem="OuD-wu-Wn5" secondAttribute="trailing" id="hXX-fX-cyY"/>
+                                            <constraint firstAttribute="bottom" secondItem="CCB-x2-sDJ" secondAttribute="bottom" id="hw1-eW-zYM"/>
+                                            <constraint firstAttribute="bottom" secondItem="OuD-wu-Wn5" secondAttribute="bottom" id="lOy-d5-Rwa"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="height" secondItem="Qrb-Cc-cZM" secondAttribute="height" id="olt-o7-0QN"/>
+                                            <constraint firstItem="OuD-wu-Wn5" firstAttribute="leading" secondItem="Zva-4A-P9V" secondAttribute="trailing" id="pLj-lw-vWH"/>
+                                            <constraint firstItem="Zva-4A-P9V" firstAttribute="top" secondItem="nnR-Lz-7V1" secondAttribute="top" id="pTH-Oq-eNu"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qrb-Cc-cZM" secondAttribute="trailing" id="tjK-Mo-d5I"/>
+                                            <constraint firstAttribute="bottom" secondItem="Zva-4A-P9V" secondAttribute="bottom" id="u8g-uK-GI8"/>
+                                            <constraint firstItem="CCB-x2-sDJ" firstAttribute="top" secondItem="nnR-Lz-7V1" secondAttribute="top" id="xwL-Mv-qqb"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.64848331729999997" blue="0.4408450786" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="nnR-Lz-7V1" firstAttribute="top" secondItem="j5L-0b-udw" secondAttribute="top" id="Aab-9L-F9t"/>
+                                    <constraint firstItem="nnR-Lz-7V1" firstAttribute="leading" secondItem="j5L-0b-udw" secondAttribute="leading" id="KRV-qk-Hwi"/>
+                                    <constraint firstItem="nnR-Lz-7V1" firstAttribute="height" secondItem="j5L-0b-udw" secondAttribute="height" id="NWY-DT-GBR"/>
+                                    <constraint firstItem="nnR-Lz-7V1" firstAttribute="width" secondItem="j5L-0b-udw" secondAttribute="width" multiplier="4:1" id="P7n-L8-J3U"/>
+                                    <constraint firstAttribute="bottom" secondItem="nnR-Lz-7V1" secondAttribute="bottom" id="RYc-4M-VdP"/>
+                                    <constraint firstItem="OuD-wu-Wn5" firstAttribute="width" secondItem="j5L-0b-udw" secondAttribute="width" id="dHF-Nz-gVv"/>
+                                    <constraint firstAttribute="trailing" secondItem="nnR-Lz-7V1" secondAttribute="trailing" multiplier="1:4" id="hf1-R6-kpw"/>
+                                    <constraint firstItem="OuD-wu-Wn5" firstAttribute="height" secondItem="j5L-0b-udw" secondAttribute="height" id="jpC-eR-C1J"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="pr2-sR-PQi" id="SE0-nd-sFZ"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -442,10 +477,10 @@
                     <connections>
                         <outlet property="mainContainerView" destination="nnR-Lz-7V1" id="MMX-k4-wtj"/>
                         <outlet property="mainScrollView" destination="j5L-0b-udw" id="rxR-Pf-0gV"/>
-                        <outlet property="tab01Btn" destination="SFa-FA-QVq" id="eGL-kS-zch"/>
-                        <outlet property="tab02Btn" destination="qUC-2t-9LA" id="h0Z-sn-R1P"/>
-                        <outlet property="tab03Btn" destination="dCH-mF-IWa" id="EfN-iF-aTk"/>
-                        <outlet property="tab04Btn" destination="s6w-ZI-uHH" id="YV8-6G-6WO"/>
+                        <outlet property="tab01Btn" destination="SFa-FA-QVq" id="ecD-OE-ftX"/>
+                        <outlet property="tab02Btn" destination="s6w-ZI-uHH" id="Spu-lv-L9y"/>
+                        <outlet property="tab03Btn" destination="qUC-2t-9LA" id="xIz-W4-erD"/>
+                        <outlet property="tab04Btn" destination="dCH-mF-IWa" id="smh-xO-JJN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0o-BG-PeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
