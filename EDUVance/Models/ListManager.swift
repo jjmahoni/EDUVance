@@ -98,6 +98,91 @@ class ListManager
         }
     }
     
+    
+    static func getSchoolInfoList(callback : (isSuccess : Bool, result : String)->() )
+    {
+        NetworkManager.getSchoolInfoList(UserManager.currentUser!.userId!, accessToken: UserManager.currentUser!.accessToken!) { (isSuccess, result, jsonData) -> () in
+        
+            if !isSuccess
+            {
+                callback(isSuccess: isSuccess, result: result)
+            }
+            else
+            {
+                if let json : NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary
+                {
+                    let resultString = json.objectForKey("result") as! Bool
+                    
+                    if resultString
+                    {
+                        let resultCode = json.objectForKey("resultCode") as! String
+                        println("학교정보 리스트 파싱 중 결과 코드 : \(resultCode)")
+                        
+                        if let data = json.objectForKey("data") as? NSDictionary
+                        {
+                            self.totalPage =  (data.objectForKey("totalPage") as! String).toInt()!
+                            self.lastIdx =  (data.objectForKey("lastIdx") as! String).toInt()!
+                            
+                            if let noticeListDicArr = data.objectForKey("schoolInfoList") as? [NSDictionary]
+                            {
+                                self.noticeList.removeAll(keepCapacity: false)
+                                for (index , oneData ) in enumerate(noticeListDicArr)
+                                {
+                                    let oneListItem = NoticeListItem()
+                                    
+                                    if let wrTitle = oneData.objectForKey("wrTitle") as? String
+                                    {
+                                        oneListItem.wrTitle = wrTitle
+                                    }
+                                    if let importance = oneData.objectForKey("importance") as? String
+                                    {
+                                        oneListItem.importance = importance
+                                    }
+                                    if let startDate = oneData.objectForKey("startDate") as? String
+                                    {
+                                        oneListItem.startDate = startDate
+                                    }
+                                    if let endDate = oneData.objectForKey("endDate") as? String
+                                    {
+                                        oneListItem.endDate = endDate
+                                    }
+                                    if let wrContent = oneData.objectForKey("wrContent") as? String
+                                    {
+                                        oneListItem.wrContent = wrContent
+                                    }
+                                    if let wrDate = oneData.objectForKey("wrDate") as? String
+                                    {
+                                        oneListItem.wrDate = wrDate
+                                    }
+                                    if let idx = oneData.objectForKey("idx") as? String
+                                    {
+                                        oneListItem.idx = idx
+                                    }
+                                    self.noticeList.append(oneListItem)
+                                    
+                                }
+                                
+                                callback(isSuccess: true, result: "성공적으로 JSON 파싱 완료")
+                            }
+                            else
+                            {
+                                callback(isSuccess: false, result: "리스트가없음")
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                    else
+                    {
+                        callback(isSuccess: false, result: "JSON 서버에서 false 보냄")
+                    }
+                    
+                }
+            }
+        }
+    }
+    
 }
 
 class NoticeListItem

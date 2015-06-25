@@ -73,6 +73,7 @@ class BaseVC: UIViewController
     // 타이틀바 라벨 변경
     func setTopTitlelabelString( title : String )
     {
+        println("상단 타이틀바 변경 확인 : \(title)")
         self.topTitleLabel.text = title
 
     }

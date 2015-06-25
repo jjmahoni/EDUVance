@@ -50,6 +50,7 @@ class NetworkManager
     pageLimit         /* 페이지당 갯수(기본값 10) */
     */
     
+    static let URL11_GET_SCHOOL_INFO_LIST : String  = "/app/community/school_info_list.php"
     
 
     
@@ -182,8 +183,46 @@ class NetworkManager
                 
             })
         }
-        
     }
 
+    
+    
+    class func getSchoolInfoList( userId : String, accessToken : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        if !HWILib.isConnectedToNetwork()
+        {
+            callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
+            return
+        }
+        
+        var request = HTTPTask()
+        
+        let params : Dictionary<String, AnyObject> = [
+            "userId" : userId ,
+            "accessToken" : accessToken
+        ]
+        
+        request.POST( SERVER_HOST + URL11_GET_SCHOOL_INFO_LIST , parameters: params) { (response : HTTPResponse) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if let err = response.error
+                {
+                    callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
+                    return
+                }
+                
+                if let data = response.responseObject as? NSData
+                {
+                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("학교정보 조회 디버그 스트링 : \(str)")
+                    
+                    callback(isSuccess: true, result: "성공적으로 메뉴 가져옴", jsonData: data)
+                    
+                }
+                
+            })
+        }
+    }
+    
     
 }

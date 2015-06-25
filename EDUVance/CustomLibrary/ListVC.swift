@@ -16,26 +16,49 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         super.viewDidLoad()
         self.backBtnTemp.hidden = false
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        println("리스트뷰 로딩 확인")
         
+        let index = find( ConstantValues.iconTitleArray , self.topTitleLabel.text! )
         HWILib.showActivityIndicator(self)
         
-        ListManager.getNoticeList { (isSuccess, result) -> () in
-            HWILib.hideActivityIndicator()
-            
-            if isSuccess
-            {
-                self.listTableView.reloadData()
+        switch index!
+        {
+        case 0:
+            ListManager.getNoticeList { (isSuccess, result) -> () in
+                HWILib.hideActivityIndicator()
+                
+                if isSuccess
+                {
+                    self.listTableView.reloadData()
+                }
+            }
+        case 3:
+            ListManager.getSchoolInfoList { (isSuccess, result) -> () in
+                HWILib.hideActivityIndicator()
+                
+                if isSuccess
+                {
+                    self.listTableView.reloadData()
+                }
             }
             
+        default:
+           break
         }
         
         
         
+        
     }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
+    
     
     override func onBackBtnTouch(sender: UIButton) {
         super.onBackBtnTouch(sender)
@@ -64,9 +87,9 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         
         cell.hwi_titleLabel.text = oneItem.wrTitle
         cell.hwi_contentLabel.text = oneItem.wrContent
-
         
-
+        
+        
         
         return cell
     }
