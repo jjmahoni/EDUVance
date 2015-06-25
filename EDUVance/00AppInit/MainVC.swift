@@ -70,7 +70,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     }
     
     
-    
+    // 탭 체인지
     func changeTabWithIndex( index : Int)
     {
         
@@ -85,15 +85,17 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
         })
-
+        
+        // 탑 타이틀바 텍스트 변경
+        self.setTopTitlelabelString(self.tabBarBtns[index].titleLabel!.text!)
+        
     }
     
 
-    
+    // 스크롤뷰 드래그가 끝날 때
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
     {
         let currentPageIndex  = Int(scrollView.contentOffset.x / self.view.frame.size.width)
-        
         self.changeTabWithIndex(currentPageIndex)
     }
     

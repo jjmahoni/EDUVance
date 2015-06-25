@@ -32,6 +32,7 @@
 		05564D061B3C02AD00564A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 05564CF51B3C02AD00564A4C /* LICENSE */; };
 		05564D071B3C02AD00564A4C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 05564CF61B3C02AD00564A4C /* README.md */; };
 		05564D081B3C02AD00564A4C /* SwiftHTTP.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 05564CF81B3C02AD00564A4C /* SwiftHTTP.podspec */; };
+		059744C41B3C2A1100532554 /* Tab02MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059744C31B3C2A1100532554 /* Tab02MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		05564CF71B3C02AD00564A4C /* SwiftHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftHTTP.h; sourceTree = "<group>"; };
 		05564CF81B3C02AD00564A4C /* SwiftHTTP.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SwiftHTTP.podspec; sourceTree = "<group>"; };
 		05564CF91B3C02AD00564A4C /* SwiftHTTP.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftHTTP.xcodeproj; sourceTree = "<group>"; };
+		059744C31B3C2A1100532554 /* Tab02MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab02MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				05564CD61B3BF73D00564A4C /* CustomLibrary */,
 				05564CD31B3BF64E00564A4C /* Library */,
 				05564CD71B3BF76C00564A4C /* 00AppInit */,
+				059744C21B3C29FA00532554 /* 02Tab */,
 				05564CBA1B3BF4B700564A4C /* Images.xcassets */,
 				05564CB31B3BF4B700564A4C /* AppDelegate.swift */,
 				05564CB71B3BF4B700564A4C /* Main.storyboard */,
@@ -250,6 +253,14 @@
 				05564D161B3C02AD00564A4C /* SwiftHTTPOSXTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		059744C21B3C29FA00532554 /* 02Tab */ = {
+			isa = PBXGroup;
+			children = (
+				059744C31B3C2A1100532554 /* Tab02MainView.swift */,
+			);
+			path = 02Tab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +417,7 @@
 				05564CDB1B3BF7E100564A4C /* HWILib.swift in Sources */,
 				05564CB41B3BF4B700564A4C /* AppDelegate.swift in Sources */,
 				05564D031B3C02AD00564A4C /* HTTPTask.swift in Sources */,
+				059744C41B3C2A1100532554 /* Tab02MainView.swift in Sources */,
 				05564D041B3C02AD00564A4C /* HTTPUpload.swift in Sources */,
 				05564CE81B3BF9E500564A4C /* UserManager.swift in Sources */,
 				05564D001B3C02AD00564A4C /* HTTPRequestSerializer.swift in Sources */,
