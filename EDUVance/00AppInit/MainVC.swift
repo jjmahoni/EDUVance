@@ -26,6 +26,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     @IBOutlet weak var itemView03: Tab03MainView!
     @IBOutlet weak var itemView04: Tab04MainView!
     
+    @IBOutlet weak var pageControlView: UIPageControl!
     
     // 뷰가 로드된 후 초기 뷰들 배치
     override func viewDidLoad()
@@ -126,7 +127,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         // 탑 타이틀바 텍스트 변경
         self.setTopTitlelabelString(self.tabBarBtns[index].titleLabel!.text!)
         self.itemViews[index].onViewShow()
-        
+        self.pageControlView.currentPage = index
         
     }
     

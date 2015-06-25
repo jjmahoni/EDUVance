@@ -10,6 +10,13 @@ import UIKit
 
 class ListCell: UITableViewCell {
 
+    @IBOutlet weak var hwi_titleLabel: UILabel!
+    @IBOutlet weak var hwi_newImageView: UIImageView!
+    @IBOutlet weak var hwi_dateLabel: UILabel!
+    @IBOutlet weak var hwi_contentLabel: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

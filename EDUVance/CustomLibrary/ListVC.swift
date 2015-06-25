@@ -9,24 +9,34 @@
 import UIKit
 
 class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
-
+    
+    @IBOutlet weak var listTableView: UITableView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.backBtnTemp.hidden = false
-    
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         HWILib.showActivityIndicator(self)
-        NetworkManager.getNoticeList(UserManager.currentUser!.userType!, userId: UserManager.currentUser!.userId!, accessToken: UserManager.currentUser!.accessToken!, pageNo: "", pageLimit: "") { (isSuccess, result, jsonData) -> () in
-            
+        
+        ListManager.getNoticeList { (isSuccess, result) -> () in
             HWILib.hideActivityIndicator()
+            
+            if isSuccess
+            {
+                self.listTableView.reloadData()
+            }
+            
         }
+        
+        
+        
     }
-
+    
     override func onBackBtnTouch(sender: UIButton) {
         super.onBackBtnTouch(sender)
         
@@ -40,17 +50,25 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return ListManager.noticeList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ListCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ListCell") as! ListCell
+        
+        let oneItem  = ListManager.noticeList[indexPath.row]
+        
+        cell.hwi_titleLabel.text = oneItem.wrTitle
+        cell.hwi_contentLabel.text = oneItem.wrContent
+
+        
+
         
         return cell
     }
-
+    
 }
