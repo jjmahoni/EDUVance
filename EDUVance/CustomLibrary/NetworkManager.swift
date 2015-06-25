@@ -98,7 +98,7 @@ class NetworkManager
     
     
     // 메뉴 조회
-    class func getMainMenu(userType : String, userId : String, accessToken : String, noticeIdx : String, scheduleIdx : String, schoolInfoIdx : String, lifeInfoIdx : String, jobInfoIdx : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    class func getMainMenuBadgeCount(userType : String, userId : String, accessToken : String, noticeIdx : String, scheduleIdx : String, schoolInfoIdx : String, lifeInfoIdx : String, jobInfoIdx : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
     {
         
         if !HWILib.isConnectedToNetwork()

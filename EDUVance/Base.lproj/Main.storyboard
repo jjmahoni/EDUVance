@@ -338,25 +338,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-0b-udw" userLabel="메인 스크롤뷰">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-0b-udw" userLabel="메인 스크롤뷰">
                                 <rect key="frame" x="0.0" y="48" width="600" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nnR-Lz-7V1" userLabel="스크롤속 컨테이너뷰">
                                         <rect key="frame" x="0.0" y="0.0" width="2400" height="498"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-4A-P9V" userLabel="1번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-4A-P9V" userLabel="1번 뷰" customClass="Tab01MainView" customModule="EDUVance" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="0.95091450889999996" green="1" blue="0.45895097639999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OuD-wu-Wn5" userLabel="2번 뷰" customClass="Tab02MainView" customModule="EDUVance" customModuleProvider="target">
                                                 <rect key="frame" x="600" y="0.0" width="600" height="498"/>
-                                                <color key="backgroundColor" red="0.64189266040000004" green="1" blue="0.8762482399" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-x2-sDJ" userLabel="3번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-x2-sDJ" userLabel="3번 뷰" customClass="Tab03MainView" customModule="EDUVance" customModuleProvider="target">
                                                 <rect key="frame" x="1200" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="0.4293826892" green="0.62829571500000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrb-Cc-cZM" userLabel="4번 뷰">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qrb-Cc-cZM" userLabel="4번 뷰" customClass="Tab04MainView" customModule="EDUVance" customModuleProvider="target">
                                                 <rect key="frame" x="1800" y="0.0" width="600" height="498"/>
                                                 <color key="backgroundColor" red="1" green="0.11551448679301834" blue="0.789173376344663" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
@@ -476,22 +476,125 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="itemView01" destination="Zva-4A-P9V" id="HOE-l2-NaK"/>
+                        <outlet property="itemView02" destination="OuD-wu-Wn5" id="t1f-UJ-Uq1"/>
+                        <outlet property="itemView03" destination="CCB-x2-sDJ" id="BcL-9w-mpq"/>
+                        <outlet property="itemView04" destination="Qrb-Cc-cZM" id="hBZ-gx-XtF"/>
                         <outlet property="mainContainerView" destination="nnR-Lz-7V1" id="MMX-k4-wtj"/>
                         <outlet property="mainScrollView" destination="j5L-0b-udw" id="rxR-Pf-0gV"/>
                         <outlet property="tab01Btn" destination="SFa-FA-QVq" id="ecD-OE-ftX"/>
                         <outlet property="tab02Btn" destination="s6w-ZI-uHH" id="Spu-lv-L9y"/>
                         <outlet property="tab03Btn" destination="qUC-2t-9LA" id="xIz-W4-erD"/>
                         <outlet property="tab04Btn" destination="dCH-mF-IWa" id="smh-xO-JJN"/>
+                        <segue destination="idO-z0-FvL" kind="presentation" identifier="main_login_seg" id="z61-VP-Wq6"/>
+                        <segue destination="FAo-lP-BkP" kind="presentation" identifier="main_list" id="jiP-QK-1Cf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0o-BG-PeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="509" y="608"/>
+            <point key="canvasLocation" x="472" y="608"/>
+        </scene>
+        <!--ListVC-->
+        <scene sceneID="EFZ-Fr-sGo">
+            <objects>
+                <viewController id="OfY-jY-u7N" customClass="ListVC" customModule="EDUVance" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fnh-ia-NiM"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xv3-PU-PGy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rve-NH-kNm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEN-aD-AHV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="N4p-ss-thW"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L90-jG-CNA">
+                                <rect key="frame" x="0.0" y="48" width="600" height="552"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ListCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListCell" rowHeight="73" id="URW-Dt-4Pw" customClass="ListCell" customModule="EDUVance" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URW-Dt-4Pw" id="6ZW-5d-Tf3">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="수강신청 기간 안내" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wo-nK-T0B">
+                                                    <rect key="frame" x="18" y="18" width="114" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_list_new" translatesAutoresizingMaskIntoConstraints="NO" id="uFz-Fk-eld">
+                                                    <rect key="frame" x="138" y="18" width="33" height="14"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAj-fG-JAj">
+                                                    <rect key="frame" x="18" y="35" width="564" height="32"/>
+                                                    <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2015.08.05 - 2015.08.21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eP-V4-7vn">
+                                                    <rect key="frame" x="445" y="18" width="137" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="OfY-jY-u7N" id="F9i-93-o5a"/>
+                                    <outlet property="delegate" destination="OfY-jY-u7N" id="1Nc-mx-MpI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rEN-aD-AHV" firstAttribute="top" secondItem="Rve-NH-kNm" secondAttribute="top" id="1CE-rF-1Bu"/>
+                            <constraint firstItem="rEN-aD-AHV" firstAttribute="leading" secondItem="Rve-NH-kNm" secondAttribute="leading" id="DGk-eO-Zrm"/>
+                            <constraint firstItem="L90-jG-CNA" firstAttribute="top" secondItem="rEN-aD-AHV" secondAttribute="bottom" id="DU5-ik-h68"/>
+                            <constraint firstItem="L90-jG-CNA" firstAttribute="leading" secondItem="Rve-NH-kNm" secondAttribute="leading" id="RK7-2F-sui"/>
+                            <constraint firstAttribute="trailing" secondItem="rEN-aD-AHV" secondAttribute="trailing" id="rLR-32-Ire"/>
+                            <constraint firstItem="Xv3-PU-PGy" firstAttribute="top" secondItem="L90-jG-CNA" secondAttribute="bottom" id="y4M-wv-NRZ"/>
+                            <constraint firstAttribute="trailing" secondItem="L90-jG-CNA" secondAttribute="trailing" id="zOB-FL-0Vd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WgY-fF-d4p"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b1A-0d-orL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2047" y="612"/>
+        </scene>
+        <!--Base NavigationC-->
+        <scene sceneID="nZc-nK-Au2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="FAo-lP-BkP" customClass="BaseNavigationC" customModule="EDUVance" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oc1-Qg-QYx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OfY-jY-u7N" kind="relationship" relationship="rootViewController" id="fqL-yg-Y93"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sRw-ta-Sh8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1235" y="612"/>
         </scene>
     </scenes>
     <resources>
         <image name="blk_login" width="252" height="210"/>
         <image name="img_bg_illust" width="320" height="100"/>
+        <image name="img_list_new" width="33" height="14"/>
         <image name="img_logo" width="212" height="81"/>
         <image name="loginBgNormal" width="1" height="1"/>
         <image name="loginBgOn" width="1" height="1"/>

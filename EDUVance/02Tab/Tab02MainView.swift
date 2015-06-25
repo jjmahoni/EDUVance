@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Tab02MainView: UIView ,IconBtnProtocol
+class Tab02MainView: BaseItemView ,IconBtnProtocol
 {
     let mainScrollView = BaseScrollView()
     let mainContainerView = UIView()
@@ -35,14 +35,138 @@ class Tab02MainView: UIView ,IconBtnProtocol
         
     }
     
-    func onBtnTouched(index : Int)
+    
+    override func onViewShow()
     {
+        super.onViewShow()
+        
+        println("2번 페이지의 뷰가 보여질 때")
+        
+        
+        // 액티비티 인디케이터 표시 및 배지카운트 조회
+        HWILib.showActivityIndicator(self.viewController!)
+        NetworkManager.getMainMenuBadgeCount(UserManager.currentUser!.userType!, userId: UserManager.currentUser!.userId!, accessToken: UserManager.currentUser!.accessToken!, noticeIdx: "", scheduleIdx: "", schoolInfoIdx: "", lifeInfoIdx: "", jobInfoIdx: "") { (isSuccess, result, jsonData) -> () in
+            
+            HWILib.hideActivityIndicator()
+            
+            if !isSuccess
+            {
+                if result == "인터넷연결안됨"
+                {
+                    self.viewController?.alertWithNoInternetConnection()
+                    return
+                }
+                
+                println("배지카운트 조회 실패")
+                return
+            }
+            
+            if let json : NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary
+            {
+                
+                
+                if let resultCode = json.objectForKey("resultCode") as? String
+                {
+                    
+                    if resultCode == "911"
+                    {
+                        
+                        if let dataDic = json.objectForKey("data") as? NSDictionary
+                        {
+                            
+                            for oneIcon in self.iconsArray
+                            {
+                                oneIcon.hideBadgeInIcon()
+                            }
+                            
+                            if let noticeCount = dataDic.objectForKey("noticeCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon01_notice, title: noticeCount)
+                            }
+                            if let messageCount = dataDic.objectForKey("messageCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon02_message, title: messageCount)
+                            }
+                            if let scheduleCount = dataDic.objectForKey("scheduleCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon03_schedule, title: scheduleCount)
+                            }
+                            if let schoolInfoCount = dataDic.objectForKey("schoolInfoCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon04_univeInfo, title: schoolInfoCount)
+                            }
+                            if let lifeInfoCount = dataDic.objectForKey("lifeInfoCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon05_liveInfo, title: lifeInfoCount)
+                            }
+                            if let jobInfoCount = dataDic.objectForKey("jobInfoCount") as? String
+                            {
+                                self.setBadgeCountWithViewAndValue( self.icon06_jobInfo, title: jobInfoCount)
+                            }
+                            
+                            
+                        }
+                    }
+                    else if resultCode == "999"
+                    {
+                        println("액세스토큰이 만료된 것으로 보임")
+
+                        
+                        self.viewController!.alertWithTitle("액세스토큰이 만료되었습니다. 다시 로그인 해 주세요", clickString: "로그인으로 이동", clickHandler: { () -> Void in
+                            if let mainVC = self.viewController! as? MainVC
+                            {
+                                mainVC.performSegueWithIdentifier("main_login_seg", sender: mainVC)
+                            }
+                        })
+                    }
+                }
+            }
+            
+            
+            
+        }
+        
+        
         
     }
     
     
+    func setBadgeCountWithViewAndValue(iconView : IconView , title : String)
+    {
+        if title != "0"
+        {
+            iconView.showBadgeWithCount(title)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    // 아이콘 터치되었을 경우  --> 해당 화면으로 이동
+    func onBtnTouched(index : Int)
+    {
+        println("아이콘 뷰 터치 감지 ---> 인덱스 : \(index)")
+        
+        self.viewController?.performSegueWithIdentifier("main_list", sender: ConstantValues.iconTitleArray[index])
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func initViews()
     {
+        
+        mainScrollView.backgroundColor = ConstantValues.color_BG_232_236_242
         // 메인 스크롤뷰 프레임 결정
         mainScrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
         
@@ -65,7 +189,7 @@ class Tab02MainView: UIView ,IconBtnProtocol
         let marginOfHeight : CGFloat = 27
         
         // 비율을 측정하기 위한 아이콘 뷰 크기  96 * 123
-
+        
         
         
         let widthOfSubContainerView = self.frame.size.width - marginOfWidth*2
@@ -104,6 +228,7 @@ class Tab02MainView: UIView ,IconBtnProtocol
         
         // 백그라운드 일러스트 삽입
         setBackgroundIllust()
+        
     }
     
     
@@ -115,13 +240,14 @@ class Tab02MainView: UIView ,IconBtnProtocol
         let rectOfIcon = CGRectMake( xOffset ,yOffset , width, height)
         oneIcon.frame = rectOfIcon
         
-        println("반복문 확인 : rectOfIcon : \(rectOfIcon)")
+        
+        /*println("반복문 확인 : rectOfIcon : \(rectOfIcon)")
         
         let oneRandomInt = (CGFloat)(Int(arc4random_uniform(255)))
         let twoRandomInt = (CGFloat)(Int(arc4random_uniform(255)))
         
         oneIcon.backgroundColor = UIColor(red: oneRandomInt/255, green: twoRandomInt/255, blue: oneRandomInt/255, alpha: 1)
-
+        */
         
         
         oneIcon.initWithTitleAndIcon(ConstantValues.iconTitleArray[index], imageName: ConstantValues.iconImageNameArray[index] , index : index)

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MainVC: BaseVC , UIScrollViewDelegate{
     
     @IBOutlet weak var tab01Btn: UIButton!
@@ -18,16 +19,20 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     @IBOutlet weak var mainContainerView: UIView!
     
     var tabBarBtns : [UIButton] = []
+    var itemViews : [BaseItemView] = []
+    
+    @IBOutlet weak var itemView01: Tab01MainView!
+    @IBOutlet weak var itemView02: Tab02MainView!
+    @IBOutlet weak var itemView03: Tab03MainView!
+    @IBOutlet weak var itemView04: Tab04MainView!
     
     
     // 뷰가 로드된 후 초기 뷰들 배치
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        setTopTitlelabelString("에듀밴스")
         initTabbar()
-
-
+        
     }
     
     // 뷰가 모두 배치되고 난 다음 마지막에 스크롤 컨텐츠 사이즈 부여
@@ -35,8 +40,30 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     {
         super.viewDidAppear(animated)
         self.mainScrollView.contentSize = self.mainContainerView.frame.size
-        self.changeTabWithIndex(1)
+
+        
+        if UserManager.currentUser == nil
+        {
+            self.performSegueWithIdentifier("main_login_seg", sender: self)
+        }
+        else
+        {
+            self.changeTabWithIndex(1)
+        }
+        
     }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "main_list"
+        {
+            let desNaviCon = segue.destinationViewController as! UINavigationController
+            let destVC = desNaviCon.viewControllers[0] as! BaseVC
+            destVC.setTopTitlelabelString(sender as! String)
+        }
+    }
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -45,10 +72,19 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     }
     
     
+    
+    
     func initTabbar()
     {
+        
+        self.itemViews = [itemView01 ,itemView02 ,itemView03 ,itemView04 ]
         self.tabBarBtns = [tab01Btn,tab02Btn,tab03Btn,tab04Btn]
-
+        
+        for oneItemView in itemViews
+        {
+            oneItemView.viewController = self
+        }
+        
 
         for (index, oneTabBtn) in enumerate(self.tabBarBtns)
         {
@@ -82,12 +118,15 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         self.tabBarBtns[index].selected = true
         
         println("들어온 인덱스 확인 : \(index)")
+        
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
         })
         
         // 탑 타이틀바 텍스트 변경
         self.setTopTitlelabelString(self.tabBarBtns[index].titleLabel!.text!)
+        self.itemViews[index].onViewShow()
+        
         
     }
     

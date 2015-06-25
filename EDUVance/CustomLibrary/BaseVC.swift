@@ -13,6 +13,7 @@ class BaseVC: UIViewController
     // 타이틀바 설정 관련
     let topTitleBar : UIView = UIView()
     let topTitleLabel : UILabel = UILabel()
+    let backBtnTemp : UIButton = UIButton()
     
     let topToteBarHeight : CGFloat = 68
     let statusBarHeight: CGFloat = 20
@@ -89,13 +90,29 @@ class BaseVC: UIViewController
         self.topTitleLabel.font = UIFont.boldSystemFontOfSize(18.0)
         
         
+        backBtnTemp.frame = CGRectMake(10, statusBarHeight , 60, topToteBarHeight-statusBarHeight)
+        
+
+        backBtnTemp.setTitle("Back", forState: UIControlState.Normal)
+        backBtnTemp.addTarget(self, action: "onBackBtnTouch:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.topTitleBar.addSubview(backBtnTemp)
+        
+        backBtnTemp.hidden = true
+        
         self.topTitleBar.addSubview(self.topTitleLabel)
         self.view.addSubview(self.topTitleBar)
         self.topTitleLabel.textAlignment = NSTextAlignment.Center
 
     }
     
-    override func shouldAutorotate() -> Bool {
+    func onBackBtnTouch(sender : UIButton)
+    {
+        
+    }
+    
+    override func shouldAutorotate() -> Bool
+    {
         return false
     }
 

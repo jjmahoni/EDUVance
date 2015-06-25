@@ -165,7 +165,7 @@ class UserManager
         }
     }
     
-    func getUserInfoFromStore()  -> (Bool)
+    class func getUserInfoFromStore()  -> (Bool)
     {
         if UserManager.currentUser == nil
         {
