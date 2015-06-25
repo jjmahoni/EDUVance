@@ -23,7 +23,6 @@ class BaseVC: UIViewController
     {
         super.viewDidLoad()
         self.setupTopTitleBar()
-        
     }
     
     
@@ -43,25 +42,22 @@ class BaseVC: UIViewController
     {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.Alert)
 
-        // 클릭 텍스트 맟 액션 삽입
+        // 클릭 텍스트 맟 액션 등록
         alert.addAction(UIAlertAction(title: clickString, style: .Default, handler: { (action : UIAlertAction!) -> Void in
             
-            // 확인 버튼 클릭 시 행동 -> 핸들러 작동
+            // 확인 버튼 클릭 시 행동 -> 핸들러 작동 정의
             if clickHandler != nil
             {
                 clickHandler!()
             }
             
-            // 얼럿 뷰 없애기
+            // 얼럿 뷰 없애기 행동 정의
             alert.dismissViewControllerAnimated(true, completion: { () -> Void in
                 
             })
-            
-
-            
         }))
         
-        // 현재 얼럿창을 화면에 띄움
+        // 행동이 정의된 현재 얼럿창을 화면에 띄움
         self.presentViewController(alert, animated: true, completion: { () -> Void in
             
         })
@@ -71,8 +67,6 @@ class BaseVC: UIViewController
     {
         self.alertWithTitle("인터넷이 연결되지 않았습니다.", clickString: "확인" , clickHandler: nil)
     }
-    
-    
     
     
     // 타이틀바 라벨 변경
@@ -88,10 +82,10 @@ class BaseVC: UIViewController
     {
         
         self.topTitleBar.frame = CGRectMake(0, 0, self.view.frame.size.width, topToteBarHeight)
-        self.topTitleBar.backgroundColor = UIColor(red: 90.0/255.0, green: 122.0/255.0, blue: 172.0/255.0, alpha: 1.0)
+        self.topTitleBar.backgroundColor = ConstantValues.color_main01_90_122_172
         self.topTitleLabel.frame = CGRectMake(0, statusBarHeight, self.topTitleBar.frame.size.width, topToteBarHeight-statusBarHeight)
         
-        self.topTitleLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        self.topTitleLabel.textColor = ConstantValues.color01_white
         self.topTitleLabel.font = UIFont.boldSystemFontOfSize(18.0)
         
         

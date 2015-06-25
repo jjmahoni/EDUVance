@@ -115,4 +115,11 @@ class HWILib
         
         return isReachable && !needsConnection
     }
+    
+    
+    // 컬러값 RGB 최대값 255를 통해 가져옴
+    class func colorWIthRGB( red : CGFloat , green : CGFloat , blue : CGFloat , alpha : CGFloat) -> UIColor
+    {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
+    }
 }
