@@ -52,6 +52,9 @@ class NetworkManager
     
     static let URL11_GET_SCHOOL_INFO_LIST : String  = "/app/community/school_info_list.php"
     
+    static let URL13_GET_LIFE_INFO_LIST : String  = "/app/community/life_info_list.php"
+    
+    static let URL15_GET_JOB_INFO_LIST : String  = "/app/community/job_info_list.php"
 
     
     
@@ -99,7 +102,7 @@ class NetworkManager
     
     
     // 메뉴 조회
-    class func getMainMenuBadgeCount(userType : String, userId : String, accessToken : String, noticeIdx : String, scheduleIdx : String, schoolInfoIdx : String, lifeInfoIdx : String, jobInfoIdx : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    class func getMainMenuBadgeCount( noticeIdx : String, scheduleIdx : String, schoolInfoIdx : String, lifeInfoIdx : String, jobInfoIdx : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
     {
         
         if !HWILib.isConnectedToNetwork()
@@ -111,9 +114,9 @@ class NetworkManager
         var request = HTTPTask()
         
         let params : Dictionary<String, AnyObject> = [
-            "userType" : userType ,
-            "userId" : userId ,
-            "accessToken" : accessToken ,
+            "userType" : UserManager.currentUser!.userType! ,
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken! ,
             "noticeIdx" : noticeIdx ,
             "scheduleIdx" : scheduleIdx ,
             "lifeInfoIdx" : lifeInfoIdx ,
@@ -145,7 +148,7 @@ class NetworkManager
     
 
     
-    class func getNoticeList(userType : String, userId : String, accessToken : String, pageNo : String, pageLimit : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    class func getNoticeList( pageNo : String, pageLimit : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
     {
         if !HWILib.isConnectedToNetwork()
         {
@@ -156,9 +159,9 @@ class NetworkManager
         var request = HTTPTask()
         
         let params : Dictionary<String, AnyObject> = [
-            "userType" : userType ,
-            "userId" : userId ,
-            "accessToken" : accessToken ,
+            "userType" : UserManager.currentUser!.userType! ,
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken! ,
             "pageNo" : pageNo ,
             "pageLimit" : pageLimit
         ]
@@ -186,8 +189,24 @@ class NetworkManager
     }
 
     
+    // 학교 정보 가져오기
+    class func getSchoolInfoList(  callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        getCommonListInfo(SERVER_HOST + URL11_GET_SCHOOL_INFO_LIST, callback: callback)
+    }
     
-    class func getSchoolInfoList( userId : String, accessToken : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    
+    // 생활정보 가저요기
+    class func getLifeInfoList(  callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        getCommonListInfo(SERVER_HOST + URL13_GET_LIFE_INFO_LIST, callback: callback)
+    }
+    
+    
+    
+    
+    /// 일반적인 리스토 네트워크 진행 시 모두 함께 사용
+    class func getCommonListInfo( urlForGetList : String , callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
     {
         if !HWILib.isConnectedToNetwork()
         {
@@ -198,11 +217,11 @@ class NetworkManager
         var request = HTTPTask()
         
         let params : Dictionary<String, AnyObject> = [
-            "userId" : userId ,
-            "accessToken" : accessToken
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken!
         ]
         
-        request.POST( SERVER_HOST + URL11_GET_SCHOOL_INFO_LIST , parameters: params) { (response : HTTPResponse) -> Void in
+        request.POST( urlForGetList , parameters: params) { (response : HTTPResponse) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if let err = response.error
@@ -222,7 +241,8 @@ class NetworkManager
                 
             })
         }
+        
+        
     }
-    
     
 }

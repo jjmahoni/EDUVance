@@ -31,11 +31,15 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     // 탭을 눌렀을 때 페이지가 전환되는 애니메이션 간격이다.
     let durationOfPageAnimation = 0.2
 
+    // 페이지 롤링 사용하고자 할 때 주석 해제  --> 아래에도 주석이 있으니 함께 해제 필요
+    /*
     // 롤링 : 스크롤이 롤링될때 딜레이되는 시간이다.
     let delayScrollRollingTime = 0.15
     
     // 롤링 : 숫자가 높을수록 민감하게 페이지가 롤링된다.
     let widthOfPageRollingSensitivity : CGFloat = 7
+    */
+    
     
     // 뷰가 로드된 후 초기 뷰들 배치
     override func viewDidLoad()
@@ -150,6 +154,9 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         self.changeTabWithIndex(currentPageIndex)
     }
     
+    
+    // 페이지 롤링 사용하고자 할 때 주석 해제
+    /*
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
         println("오프셋 확인 : \(scrollView.contentOffset)")
@@ -169,8 +176,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
                 self.changeTabWithIndex(0)
                 })
             }
-        
     }
-    
+    */
 
 }

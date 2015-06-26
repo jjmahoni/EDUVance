@@ -58,7 +58,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         // 액티비티 인디케이터 표시 및 배지카운트 조회
 //        HWILib.showActivityIndicator(self.viewController!)
-        NetworkManager.getMainMenuBadgeCount(UserManager.currentUser!.userType!, userId: UserManager.currentUser!.userId!, accessToken: UserManager.currentUser!.accessToken!, noticeIdx: "", scheduleIdx: "", schoolInfoIdx: "", lifeInfoIdx: "", jobInfoIdx: "") { (isSuccess, result, jsonData) -> () in
+        NetworkManager.getMainMenuBadgeCount("", scheduleIdx: "", schoolInfoIdx: "", lifeInfoIdx: "", jobInfoIdx: "") { (isSuccess, result, jsonData) -> () in
             
 //            HWILib.hideActivityIndicator()
             
