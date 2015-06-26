@@ -27,12 +27,23 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     @IBOutlet weak var itemView04: Tab04MainView!
     
     @IBOutlet weak var pageControlView: UIPageControl!
+
+    // 탭을 눌렀을 때 페이지가 전환되는 애니메이션 간격이다.
+    let durationOfPageAnimation = 0.2
+
+    // 롤링 : 스크롤이 롤링될때 딜레이되는 시간이다.
+    let delayScrollRollingTime = 0.15
+    
+    // 롤링 : 숫자가 높을수록 민감하게 페이지가 롤링된다.
+    let widthOfPageRollingSensitivity : CGFloat = 7
     
     // 뷰가 로드된 후 초기 뷰들 배치
     override func viewDidLoad()
     {
         super.viewDidLoad()
         initTabbar()
+        pageControlView.pageIndicatorTintColor = ConstantValues.color_pageIndicatorOffState_194_205_227
+        pageControlView.currentPageIndicatorTintColor = ConstantValues.color_main01_90_122_172
         
     }
     
@@ -120,7 +131,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         
         println("들어온 인덱스 확인 : \(index)")
         
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+        UIView.animateWithDuration(durationOfPageAnimation, animations: { () -> Void in
             self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
         })
         
@@ -128,15 +139,37 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         self.setTopTitlelabelString(self.tabBarBtns[index].titleLabel!.text!)
         self.itemViews[index].onViewShow()
         self.pageControlView.currentPage = index
-        
     }
     
 
     // 스크롤뷰 드래그가 끝날 때
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
     {
+        println("스크롤뷰 테스트 scrollViewDidEndDecelerating")
         let currentPageIndex  = Int(scrollView.contentOffset.x / self.view.frame.size.width)
         self.changeTabWithIndex(currentPageIndex)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        println("오프셋 확인 : \(scrollView.contentOffset)")
+        
+
+            if scrollView.contentOffset.x <  -(self.view.frame.size.width/widthOfPageRollingSensitivity)
+            {
+                HWILib.delay( delayScrollRollingTime, closure: { () -> () in
+                self.changeTabWithIndex(self.itemViews.count-1)
+                })
+
+            }
+            
+            if scrollView.contentOffset.x > (CGFloat(self.itemViews.count - 1) * self.view.frame.size.width) + self.view.frame.size.width/widthOfPageRollingSensitivity
+            {
+                HWILib.delay(delayScrollRollingTime , closure: { () -> () in
+                self.changeTabWithIndex(0)
+                })
+            }
+        
     }
     
 

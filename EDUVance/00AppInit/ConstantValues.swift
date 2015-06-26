@@ -42,7 +42,9 @@ class ConstantValues
     static let color_main06_32_60_102 = HWILib.colorWIthRGB(32, green: 60, blue: 102, alpha: 1)
     static let color_main07_232_24_92 = HWILib.colorWIthRGB(232, green: 24, blue: 92, alpha: 1)
     static let color_main08_93_93_93 = HWILib.colorWIthRGB(93, green: 93, blue: 93, alpha: 1)
-    static let color_BG_232_236_242 = HWILib.colorWIthRGB(232, green: 236, blue: 242, alpha: 1)
+    
+    static let color_pageIndicatorOffState_194_205_227 = HWILib.colorWIthRGB(194, green: 205, blue: 227, alpha: 1)
+
     
     
 

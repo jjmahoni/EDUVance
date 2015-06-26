@@ -25,14 +25,27 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     
     var iconsArray : [IconView] = []
     
+    var isViewDidLoad = false
     
     override func drawRect(rect: CGRect)
     {
         super.drawRect(rect)
-        
+
+    }
+    
+    override func layoutSubviews()
+    {
+        super.layoutSubviews()
+        println("-------> layoutSubviews")
+
         // 스크롤뷰와 컨테이너 뷰 초기화
-        initViews()
+        if !isViewDidLoad
+        {
+            initViews()
+            isViewDidLoad = true
+        }
         
+
     }
     
     
@@ -44,10 +57,10 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         
         // 액티비티 인디케이터 표시 및 배지카운트 조회
-        HWILib.showActivityIndicator(self.viewController!)
+//        HWILib.showActivityIndicator(self.viewController!)
         NetworkManager.getMainMenuBadgeCount(UserManager.currentUser!.userType!, userId: UserManager.currentUser!.userId!, accessToken: UserManager.currentUser!.accessToken!, noticeIdx: "", scheduleIdx: "", schoolInfoIdx: "", lifeInfoIdx: "", jobInfoIdx: "") { (isSuccess, result, jsonData) -> () in
             
-            HWILib.hideActivityIndicator()
+//            HWILib.hideActivityIndicator()
             
             if !isSuccess
             {
@@ -166,10 +179,14 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     func initViews()
     {
         
-        mainScrollView.backgroundColor = ConstantValues.color_BG_232_236_242
+        self.backgroundColor = ConstantValues.color_main03_230_234_242
+        
+        
+        mainScrollView.backgroundColor = UIColor.clearColor()
         // 메인 스크롤뷰 프레임 결정
         mainScrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
-        
+
+
         
         // 아이콘들 배열 생성
         self.iconsArray = [
@@ -215,19 +232,26 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         // 테스트용
         mainContainerView.frame = CGRectMake(0, 0, self.frame.size.width, heightOfSubContainerView + marginOfHeight)
-        
+        mainContainerView.backgroundColor = UIColor.clearColor()
         mainContainerView.addSubview(self.subContainerView)
         
         
+
+        
         // 현재 뷰에 스크롤뷰와 컨테이너 뷰 삽입
         mainScrollView.addSubview(mainContainerView)
+        
+        // 백그라운드 일러스트 삽입
+        setBackgroundIllust()
+        
         self.addSubview(mainScrollView)
+        
+
         
         // 스크롤뷰 컨텐츠 사이즈 결정
         mainScrollView.contentSize = mainContainerView.frame.size
         
-        // 백그라운드 일러스트 삽입
-        setBackgroundIllust()
+
         
     }
     
