@@ -73,6 +73,8 @@ class LoginVC: BaseVC , UITextFieldDelegate{
             }
             else
             {
+                
+
                 if message == "인터넷연결안됨"
                 {
                     self.alertWithNoInternetConnection()

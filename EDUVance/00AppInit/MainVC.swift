@@ -31,14 +31,15 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     // 탭을 눌렀을 때 페이지가 전환되는 애니메이션 간격이다.
     let durationOfPageAnimation = 0.2
 
-    // 페이지 롤링 사용하고자 할 때 주석 해제  --> 아래에도 주석이 있으니 함께 해제 필요
+    // ---> 페이지 롤링 사용하고자 할 때 주석 해제  --> 아래에도 주석이 있으니 함께 해제 필요
     /*
     // 롤링 : 스크롤이 롤링될때 딜레이되는 시간이다.
-    let delayScrollRollingTime = 0.15
+    let delayScrollRollingTime = 0.2
     
     // 롤링 : 숫자가 높을수록 민감하게 페이지가 롤링된다.
     let widthOfPageRollingSensitivity : CGFloat = 7
     */
+    // 페이지 롤링 사용하고자 할 때 주석 해제  --> 아래에도 주석이 있으니 함께 해제 필요  <----
     
     
     // 뷰가 로드된 후 초기 뷰들 배치
@@ -64,7 +65,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         }
         else
         {
-            self.changeTabWithIndex(1)
+            self.changeTabWithIndex(1  , wantAnimation : false)
         }
         
     }
@@ -118,12 +119,12 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     
     func onTabTouchUpInside(sender : UIButton)
     {
-        self.changeTabWithIndex(sender.tag)
+        self.changeTabWithIndex(sender.tag , wantAnimation : true)
     }
     
     
     // 탭 체인지
-    func changeTabWithIndex( index : Int)
+    func changeTabWithIndex( index : Int , wantAnimation : Bool)
     {
         
         for oneBtn in self.tabBarBtns
@@ -135,9 +136,20 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         
         println("들어온 인덱스 확인 : \(index)")
         
-        UIView.animateWithDuration(durationOfPageAnimation, animations: { () -> Void in
-            self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
-        })
+        
+        if wantAnimation
+        {
+            UIView.animateWithDuration(durationOfPageAnimation, animations: { () -> Void in
+                self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
+            })
+        }
+        else
+        {
+
+                self.mainScrollView.contentOffset = CGPointMake( self.view.frame.size.width * CGFloat(index) , 0)
+
+        }
+        
         
         // 탑 타이틀바 텍스트 변경
         self.setTopTitlelabelString(self.tabBarBtns[index].titleLabel!.text!)
@@ -151,11 +163,11 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     {
         println("스크롤뷰 테스트 scrollViewDidEndDecelerating")
         let currentPageIndex  = Int(scrollView.contentOffset.x / self.view.frame.size.width)
-        self.changeTabWithIndex(currentPageIndex)
+        self.changeTabWithIndex(currentPageIndex , wantAnimation : true)
     }
     
     
-    // 페이지 롤링 사용하고자 할 때 주석 해제
+    //  ---->   페이지 롤링 사용하고자 할 때 주석 해제
     /*
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
@@ -165,7 +177,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
             if scrollView.contentOffset.x <  -(self.view.frame.size.width/widthOfPageRollingSensitivity)
             {
                 HWILib.delay( delayScrollRollingTime, closure: { () -> () in
-                self.changeTabWithIndex(self.itemViews.count-1)
+                    self.changeTabWithIndex(self.itemViews.count-1 , wantAnimation : false)
                 })
 
             }
@@ -173,10 +185,11 @@ class MainVC: BaseVC , UIScrollViewDelegate{
             if scrollView.contentOffset.x > (CGFloat(self.itemViews.count - 1) * self.view.frame.size.width) + self.view.frame.size.width/widthOfPageRollingSensitivity
             {
                 HWILib.delay(delayScrollRollingTime , closure: { () -> () in
-                self.changeTabWithIndex(0)
+                self.changeTabWithIndex(0, wantAnimation : false)
                 })
             }
     }
     */
+    //  ---->   페이지 롤링 사용하고자 할 때 주석 해제    <-------
 
 }
