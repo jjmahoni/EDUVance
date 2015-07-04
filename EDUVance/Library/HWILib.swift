@@ -122,4 +122,11 @@ class HWILib
     {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
     }
+    
+    class func getDocumentsDirectory() -> NSString
+    {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentDirectory = paths[0] as! String
+        return documentDirectory
+    }
 }

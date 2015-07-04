@@ -46,11 +46,35 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         super.onViewShow()
         
         println("2번 페이지의 뷰가 보여질 때")
+
+
         
+        
+        var noticeIdx = ""
+        var message = ""
+        var scheduleIdx = ""
+        var schoolInfoIdx = ""
+        var lifeInfoIdx = ""
+        var jobInfoIdx = ""
+        var params = [noticeIdx , message, scheduleIdx, schoolInfoIdx, lifeInfoIdx, jobInfoIdx ]
+        
+        
+        // 파일로 저장된 읽은목록 데이터를 가져옴
+        ListManager.getStoredListData()
+
+        
+        // 파일에서 가져온 데이터를 파라미터로 복사 --> 만약 저장된 파일이 없을 경우 해당 배열은 사이즈가 0이므로 건너뜀
+        if ListManager.arrayOfStoreInfo.count != 0
+        {
+            for (index, oneModel) in enumerate(ListManager.arrayOfStoreInfo)
+            {
+                params[index] = oneModel.lastIndexOfGetData
+            }
+        }
         
         // 액티비티 인디케이터 표시 및 배지카운트 조회
 //        HWILib.showActivityIndicator(self.viewController!)
-        NetworkManager.getMainMenuBadgeCount("", scheduleIdx: "", schoolInfoIdx: "", lifeInfoIdx: "", jobInfoIdx: "") { (isSuccess, result, jsonData) -> () in
+        NetworkManager.getMainMenuBadgeCount(params[0], scheduleIdx: params[2], schoolInfoIdx: params[3], lifeInfoIdx: params[4], jobInfoIdx: params[5]) { (isSuccess, result, jsonData) -> () in
             
 //            HWILib.hideActivityIndicator()
             
@@ -125,15 +149,13 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
                         })
                     }
                 }
-            }
+            } // -> JSON 파싱 종료
             
-            
-            
-        }
-        
-        
+        }  // --> 네트워크 로직 종료
         
     }
+    
+    
     
     
     func setBadgeCountWithViewAndValue(iconView : IconView , title : String)
@@ -154,6 +176,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     {
         println("아이콘 뷰 터치 감지 ---> 인덱스 : \(index)")
         
+        // 일반적인 리스트 화면으로 이동 (공지사항, 학교정보, 생활정보, 취업정보)
         self.viewController?.performSegueWithIdentifier("main_list", sender: ConstantValues.iconTitleArray[index])
     }
     
@@ -199,14 +222,11 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         // 비율을 측정하기 위한 아이콘 뷰 크기  96 * 123
         
-        
-        
         let widthOfSubContainerView = self.frame.size.width - marginOfWidth*2
         let widthOfOneIconView = widthOfSubContainerView / 3
         
         let heightOfOneIconView = widthOfOneIconView * 123 / 96
         let heightOfSubContainerView = heightOfOneIconView * 3
-        
         
         
         
@@ -221,8 +241,6 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         }
         
         
-        
-        // 테스트용
         mainContainerView.frame = CGRectMake(0, 0, self.frame.size.width, heightOfSubContainerView + marginOfHeight)
         mainContainerView.backgroundColor = UIColor.clearColor()
         mainContainerView.addSubview(self.subContainerView)

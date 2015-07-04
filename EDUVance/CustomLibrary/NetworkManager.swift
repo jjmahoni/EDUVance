@@ -119,6 +119,7 @@ class NetworkManager
             "accessToken" : UserManager.currentUser!.accessToken! ,
             "noticeIdx" : noticeIdx ,
             "scheduleIdx" : scheduleIdx ,
+            "schoolInfoIdx" : schoolInfoIdx,
             "lifeInfoIdx" : lifeInfoIdx ,
             "jobInfoIdx" : jobInfoIdx
         ]

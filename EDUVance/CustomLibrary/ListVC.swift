@@ -101,14 +101,14 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ListManager.noticeList.count
+        return ListManager.commonList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListCell") as! ListCell
         
-        let oneItem  = ListManager.noticeList[indexPath.row]
+        let oneItem  = ListManager.commonList[indexPath.row]
         
         cell.hwi_titleLabel.text = oneItem.wrTitle
         cell.hwi_contentLabel.text = oneItem.wrContent
