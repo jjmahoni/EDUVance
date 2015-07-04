@@ -50,6 +50,11 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         pageControlView.pageIndicatorTintColor = ConstantValues.color_pageIndicatorOffState_194_205_227
         pageControlView.currentPageIndicatorTintColor = ConstantValues.color_main01_90_122_172
         
+        HWILib.delay(0.1, closure: { () -> () in
+            self.itemView02.onViewLoad()
+        })
+
+        
     }
     
     // 뷰가 모두 배치되고 난 다음 마지막에 스크롤 컨텐츠 사이즈 부여
@@ -57,7 +62,6 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     {
         super.viewDidAppear(animated)
         self.mainScrollView.contentSize = self.mainContainerView.frame.size
-
         
         if UserManager.currentUser == nil
         {

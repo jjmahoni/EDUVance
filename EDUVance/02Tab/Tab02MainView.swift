@@ -25,28 +25,20 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     
     var iconsArray : [IconView] = []
     
-    var isViewDidLoad = false
+//    var isViewDidLoad = false
     
     override func drawRect(rect: CGRect)
     {
         super.drawRect(rect)
 
     }
-    
-    override func layoutSubviews()
+
+
+    func onViewLoad()
     {
-        super.layoutSubviews()
-        println("-------> layoutSubviews")
-
-        // 스크롤뷰와 컨테이너 뷰 초기화
-        if !isViewDidLoad
-        {
             initViews()
-            isViewDidLoad = true
-        }
-        
-
     }
+    
     
     
     override func onViewShow()
