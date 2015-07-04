@@ -59,6 +59,7 @@
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu001" placeholder="학번을 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S73-KV-m5z" userLabel="아이디 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="74" width="193" height="28"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="textColor" red="0.23529411759999999" green="0.30588235289999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -80,6 +81,7 @@
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu001" placeholder="비밀번호를 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-t3-ytW" userLabel="패스워드 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
                                                         <rect key="frame" x="29" y="111" width="193" height="28"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="textColor" red="0.23529411759999999" green="0.30588235289999999" blue="0.41568627450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -95,10 +97,10 @@
                                                             <outlet property="delegate" destination="idO-z0-FvL" id="q4B-cY-amb"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gym-br-wPX">
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gym-br-wPX" userLabel="자동로그인 뷰">
                                                         <rect key="frame" x="29" y="139" width="193" height="35"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppN-86-cu4" userLabel="체크박스 이미지버튼">
+                                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppN-86-cu4" userLabel="체크박스 이미지버튼">
                                                                 <rect key="frame" x="6" y="10" width="15" height="15"/>
                                                                 <state key="normal" image="checkbox_white_n">
                                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -440,52 +442,72 @@
                                     <constraint firstAttribute="height" constant="68" id="HPq-WM-YWO"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L90-jG-CNA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L90-jG-CNA">
                                 <rect key="frame" x="0.0" y="68" width="600" height="532"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ListCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListCell" rowHeight="75" id="URW-Dt-4Pw" customClass="ListCell" customModule="EDUVance" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="ListCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListCell" id="URW-Dt-4Pw" customClass="ListCell" customModule="EDUVance" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URW-Dt-4Pw" id="6ZW-5d-Tf3">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수강신청 기간 안내" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wo-nK-T0B">
-                                                    <rect key="frame" x="15" y="15" width="106" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="18" y="14" width="91" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="87o-Om-7ti"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_list_new" translatesAutoresizingMaskIntoConstraints="NO" id="uFz-Fk-eld">
-                                                    <rect key="frame" x="128" y="15" width="33" height="14"/>
+                                                    <rect key="frame" x="118" y="14" width="33" height="14"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="14" id="Ebd-ur-Xgx"/>
-                                                        <constraint firstAttribute="width" constant="33" id="nyG-aH-Nss"/>
+                                                        <constraint firstAttribute="width" constant="33" id="VXs-7W-Anc"/>
+                                                        <constraint firstAttribute="height" constant="14" id="qQf-zO-z47"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAj-fG-JAj">
-                                                    <rect key="frame" x="18" y="40" width="564" height="29"/>
+                                                    <rect key="frame" x="18" y="34" width="564" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="Jnl-xm-qs6"/>
+                                                    </constraints>
                                                     <string key="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.08.05 - 2015.08.21" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eP-V4-7vn">
+                                                    <rect key="frame" x="445" y="14" width="137" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="Eqv-UW-BbC"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.08.05 - 2015.08.21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eP-V4-7vn">
-                                                    <rect key="frame" x="448" y="15" width="137" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.12.12 12:12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQ3-kf-j4p">
+                                                    <rect key="frame" x="492" y="66" width="90" height="10"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="10" id="b1A-9J-pEb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="KAj-fG-JAj" firstAttribute="top" secondItem="4wo-nK-T0B" secondAttribute="bottom" constant="8" id="0QH-4A-RCI"/>
-                                                <constraint firstItem="KAj-fG-JAj" firstAttribute="leading" secondItem="6ZW-5d-Tf3" secondAttribute="leading" constant="18" id="6vI-nC-VzV"/>
-                                                <constraint firstItem="uFz-Fk-eld" firstAttribute="leading" secondItem="4wo-nK-T0B" secondAttribute="trailing" constant="7" id="79C-NL-9rd"/>
-                                                <constraint firstAttribute="trailing" secondItem="KAj-fG-JAj" secondAttribute="trailing" constant="18" id="Jce-qR-TqE"/>
-                                                <constraint firstAttribute="trailing" secondItem="9eP-V4-7vn" secondAttribute="trailing" constant="15" id="VcW-30-G4M"/>
-                                                <constraint firstItem="9eP-V4-7vn" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="15" id="Yaf-Df-Kj8"/>
-                                                <constraint firstItem="uFz-Fk-eld" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="15" id="aer-WQ-1Kq"/>
-                                                <constraint firstItem="4wo-nK-T0B" firstAttribute="leading" secondItem="6ZW-5d-Tf3" secondAttribute="leading" constant="15" id="mg4-Mw-c05"/>
-                                                <constraint firstItem="4wo-nK-T0B" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="15" id="p8T-gP-ep7"/>
+                                                <constraint firstItem="9eP-V4-7vn" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="14" id="3jj-Zd-rks"/>
+                                                <constraint firstItem="uFz-Fk-eld" firstAttribute="leading" secondItem="4wo-nK-T0B" secondAttribute="trailing" constant="9" id="DCv-Da-eK5"/>
+                                                <constraint firstAttribute="trailing" secondItem="KAj-fG-JAj" secondAttribute="trailing" constant="18" id="IZe-Hz-zcH"/>
+                                                <constraint firstItem="KAj-fG-JAj" firstAttribute="leading" secondItem="6ZW-5d-Tf3" secondAttribute="leading" constant="18" id="KXh-Gc-8Qe"/>
+                                                <constraint firstAttribute="bottom" secondItem="mQ3-kf-j4p" secondAttribute="bottom" constant="7" id="LzP-O6-z0r"/>
+                                                <constraint firstItem="4wo-nK-T0B" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="14" id="b7V-GF-wI9"/>
+                                                <constraint firstItem="uFz-Fk-eld" firstAttribute="top" secondItem="6ZW-5d-Tf3" secondAttribute="top" constant="14" id="lLs-f7-NDS"/>
+                                                <constraint firstItem="4wo-nK-T0B" firstAttribute="leading" secondItem="6ZW-5d-Tf3" secondAttribute="leading" constant="18" id="meN-Cq-783"/>
+                                                <constraint firstAttribute="trailing" secondItem="mQ3-kf-j4p" secondAttribute="trailing" constant="18" id="qNC-jI-XVy"/>
+                                                <constraint firstItem="KAj-fG-JAj" firstAttribute="top" secondItem="9eP-V4-7vn" secondAttribute="bottom" constant="5" id="yUq-Mc-TFE"/>
+                                                <constraint firstAttribute="trailing" secondItem="9eP-V4-7vn" secondAttribute="trailing" constant="18" id="zUL-1a-acl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

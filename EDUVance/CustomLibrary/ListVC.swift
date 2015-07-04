@@ -108,6 +108,10 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListCell") as! ListCell
         
+        let selectedColorV = UIView()
+        selectedColorV.backgroundColor = ConstantValues.color_main03_230_234_242
+        cell.selectedBackgroundView = selectedColorV
+        
         let oneItem  = ListManager.commonList[indexPath.row]
         
         cell.hwi_titleLabel.text = oneItem.wrTitle
@@ -137,5 +141,11 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         
         return cell
     }
+
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let oneItem = ListManager.commonList[indexPath.row]
+        oneItem.isRead = true
+    }
 }

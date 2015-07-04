@@ -19,13 +19,6 @@ class ListManager
     //_____________________________________________________________________________
     
 
-    static var storeInfo01_notice = ModelForStoreData()
-    static var storeInfo02_message = ModelForStoreData()
-    static var storeInfo03_schedule = ModelForStoreData()
-    static var storeInfo04_schoolInfo = ModelForStoreData()
-    static var storeInfo05_lifeInfo = ModelForStoreData()
-    static var storeInfo06_jobInfo = ModelForStoreData()
-
     
     static var arrayOfStoreInfo : [ModelForStoreData] = []
     
@@ -47,11 +40,8 @@ class ListManager
     
     class func saveDataToFile()
     {
-        self.arrayOfStoreInfo = [ storeInfo01_notice, storeInfo02_message , storeInfo03_schedule , storeInfo04_schoolInfo, storeInfo05_lifeInfo, storeInfo06_jobInfo]
-        
         var filePath = HWILib.getDocumentsDirectory().stringByAppendingPathComponent(UserManager.currentUser!.userId!)
         NSKeyedArchiver.archiveRootObject(self.arrayOfStoreInfo, toFile: filePath)
-        
     }
     
     
@@ -151,26 +141,32 @@ class ListManager
                                     self.commonList.append(oneListItem)
                                     
                                 }
-                                
+                                if self.arrayOfStoreInfo.count == 0
+                                {
+                                    for index in 0...5
+                                    {
+                                        self.arrayOfStoreInfo.append(ModelForStoreData())
+                                    }
+                                }
                                 
                                 if keyForValue == "noticeList"
                                 {
-                                    self.storeInfo01_notice.lastIndexOfGetData = "\(maxIdx)"
+                                    self.arrayOfStoreInfo[0].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "schoolInfoList"
                                 {
-                                    self.storeInfo04_schoolInfo.lastIndexOfGetData = "\(maxIdx)"
+                                    self.arrayOfStoreInfo[3].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "lifeInfoList"
                                 {
-                                    self.storeInfo05_lifeInfo.lastIndexOfGetData = "\(maxIdx)"
+                                    self.arrayOfStoreInfo[4].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "jobInfoList"
                                 {
-                                    self.storeInfo06_jobInfo.lastIndexOfGetData = "\(maxIdx)"
+                                    self.arrayOfStoreInfo[5].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 // 파일로 현재 내역 저장
@@ -210,6 +206,8 @@ class CommonListItem
     var wrContent : String?
     var wrDate : String?
     var idx : String?
+    
+    var isRead : Bool?
 }
 
 
