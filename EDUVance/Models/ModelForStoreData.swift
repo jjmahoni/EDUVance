@@ -38,5 +38,6 @@ class ModelForStoreData : NSObject, NSCoding
     {
         super.init()
     }
-
+    
+    
 }

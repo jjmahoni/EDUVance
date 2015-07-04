@@ -27,6 +27,8 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     @IBOutlet weak var itemView04: Tab04MainView!
     
     @IBOutlet weak var pageControlView: UIPageControl!
+    
+    var isFirstLoad = true
 
     // 탭을 눌렀을 때 페이지가 전환되는 애니메이션 간격이다.
     let durationOfPageAnimation = 0.2
@@ -47,11 +49,17 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     {
         super.viewDidLoad()
         initTabbar()
+        
+        self.mainContainerView.backgroundColor = UIColor.clearColor()
+        mainScrollView.backgroundColor = ConstantValues.color_main03_230_234_242
         pageControlView.pageIndicatorTintColor = ConstantValues.color_pageIndicatorOffState_194_205_227
         pageControlView.currentPageIndicatorTintColor = ConstantValues.color_main01_90_122_172
         
         HWILib.delay(0.1, closure: { () -> () in
+            
             self.itemView02.onViewLoad()
+            self.setBackgroundIllust()
+            self.mainScrollView.contentSize = self.mainContainerView.frame.size
         })
 
         
@@ -61,7 +69,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-        self.mainScrollView.contentSize = self.mainContainerView.frame.size
+
         
         if UserManager.currentUser == nil
         {
@@ -69,7 +77,15 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         }
         else
         {
-            self.changeTabWithIndex(1  , wantAnimation : false)
+            if isFirstLoad
+            {
+                self.changeTabWithIndex(1  , wantAnimation : false)
+                self.isFirstLoad = false
+            }
+            
+            self.itemViews[self.pageControlView.currentPage].onViewShow()
+            
+            
         }
         
     }
@@ -162,6 +178,26 @@ class MainVC: BaseVC , UIScrollViewDelegate{
     }
     
 
+    // 백그라운드 일러스트 삽입부분
+    
+    func setBackgroundIllust()
+    {
+        let backIllust = UIImage(named: "img_bg_illust")!
+        
+        let heightOfImage = (self.view.frame.size.width * backIllust.size.height) / backIllust.size.width
+        
+        println("이미지 확인 : \(backIllust)")
+        
+        let backgroundImageView = UIImageView(image: backIllust)
+        backgroundImageView.frame = CGRectMake(0, self.view.frame.height - self.tab01Btn.frame.size.height - heightOfImage , self.view.frame.size.width, heightOfImage)
+        
+        self.view.addSubview(backgroundImageView)
+        
+        self.view.bringSubviewToFront(self.pageControlView)
+    }
+
+    
+    
     // 스크롤뷰 드래그가 끝날 때
     func scrollViewDidEndDecelerating(scrollView: UIScrollView)
     {
@@ -169,6 +205,8 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         let currentPageIndex  = Int(scrollView.contentOffset.x / self.view.frame.size.width)
         self.changeTabWithIndex(currentPageIndex , wantAnimation : true)
     }
+    
+    
     
     
     //  ---->   페이지 롤링 사용하고자 할 때 주석 해제

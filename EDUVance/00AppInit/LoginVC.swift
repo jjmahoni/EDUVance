@@ -11,13 +11,14 @@ import UIKit
 class LoginVC: BaseVC , UITextFieldDelegate{
 
     @IBOutlet weak var scrv01_loginSC: BaseScrollView!
-    @IBOutlet weak var switch01_autologin: UISwitch!
+
     @IBOutlet weak var textField01_inputId: InsetTextField!
     @IBOutlet weak var textField02_inputPW: InsetTextField!
     
     var latestContentOffset : CGFloat = 0
     var currentKeyboardHeight : CGFloat = 0
     
+    @IBOutlet weak var btn01_autoLogin: UIButton!
     // 뷰 로드 시점
     override func viewDidLoad()
     {
@@ -38,6 +39,11 @@ class LoginVC: BaseVC , UITextFieldDelegate{
     }
     
     
+    @IBAction func onAutoLoginCheckTouchUpInside(sender: UIButton)
+    {
+        btn01_autoLogin.selected = !btn01_autoLogin.selected
+        
+    }
     
     // 로그인 버튼 클릭
     @IBAction func onBtnLogin(sender: UIButton)
@@ -63,7 +69,7 @@ class LoginVC: BaseVC , UITextFieldDelegate{
         
         HWILib.showActivityIndicator(self)
         
-        UserManager.sharedInstance.login(inputId, inputPw: inputPw, isAutoLogin: switch01_autologin.on) { (isSuccess, message) -> () in
+        UserManager.sharedInstance.login(inputId, inputPw: inputPw, isAutoLogin: btn01_autoLogin.selected) { (isSuccess, message) -> () in
             
             if isSuccess
             {
@@ -73,8 +79,6 @@ class LoginVC: BaseVC , UITextFieldDelegate{
             }
             else
             {
-                
-
                 if message == "인터넷연결안됨"
                 {
                     self.alertWithNoInternetConnection()

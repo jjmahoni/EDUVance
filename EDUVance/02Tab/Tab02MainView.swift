@@ -69,11 +69,15 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
             for (index, oneModel) in enumerate(ListManager.arrayOfStoreInfo)
             {
                 params[index] = oneModel.lastIndexOfGetData
+                println("파라미터 디버깅 --->  index :  \(index)    ,    lastIndex : \(oneModel.lastIndexOfGetData)")
             }
         }
         
         // 액티비티 인디케이터 표시 및 배지카운트 조회
 //        HWILib.showActivityIndicator(self.viewController!)
+        
+
+        
         NetworkManager.getMainMenuBadgeCount(params[0], scheduleIdx: params[2], schoolInfoIdx: params[3], lifeInfoIdx: params[4], jobInfoIdx: params[5]) { (isSuccess, result, jsonData) -> () in
             
 //            HWILib.hideActivityIndicator()
@@ -194,7 +198,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     func initViews()
     {
         
-        self.backgroundColor = ConstantValues.color_main03_230_234_242
+        self.backgroundColor = UIColor.clearColor()
         
         
         mainScrollView.backgroundColor = UIColor.clearColor()
@@ -251,8 +255,6 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         // 현재 뷰에 스크롤뷰와 컨테이너 뷰 삽입
         mainScrollView.addSubview(mainContainerView)
         
-        // 백그라운드 일러스트 삽입
-        setBackgroundIllust()
         
         self.addSubview(mainScrollView)
         
@@ -291,18 +293,5 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     }
     
     
-    
-    func setBackgroundIllust()
-    {
-        let backIllust = UIImage(named: "img_bg_illust")!
-        
-        let heightOfImage = (self.frame.size.width * backIllust.size.height) / backIllust.size.width
-        
-        println("이미지 확인 : \(backIllust)")
-        
-        let backgroundImageView = UIImageView(image: backIllust)
-        backgroundImageView.frame = CGRectMake(0, self.frame.height-heightOfImage, self.frame.size.width, heightOfImage)
-        
-        self.addSubview(backgroundImageView)
-    }
+
 }

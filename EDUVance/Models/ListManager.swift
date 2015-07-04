@@ -29,17 +29,18 @@ class ListManager
     
     static var arrayOfStoreInfo : [ModelForStoreData] = []
     
-    static var currentStoreItem = ModelForStoreData()
+
     
     class func getStoredListData()
     {
-        if let array = NSKeyedUnarchiver.unarchiveObjectWithFile(HWILib.getDocumentsDirectory().stringByAppendingPathComponent("readList")) as? [ModelForStoreData]
+        if let array = NSKeyedUnarchiver.unarchiveObjectWithFile(HWILib.getDocumentsDirectory().stringByAppendingPathComponent(UserManager.currentUser!.userId!)) as? [ModelForStoreData]
         {
             self.arrayOfStoreInfo = array
             
             for (index, oneItem) in enumerate(self.arrayOfStoreInfo)
             {
                 arrayOfStoreInfo[index] = oneItem
+                println("파일에서 데이터 가져옴 : oneItem : \(oneItem.lastIndexOfGetData)")
             }
         }
     }
@@ -48,7 +49,7 @@ class ListManager
     {
         self.arrayOfStoreInfo = [ storeInfo01_notice, storeInfo02_message , storeInfo03_schedule , storeInfo04_schoolInfo, storeInfo05_lifeInfo, storeInfo06_jobInfo]
         
-        var filePath = HWILib.getDocumentsDirectory().stringByAppendingPathComponent("readList")
+        var filePath = HWILib.getDocumentsDirectory().stringByAppendingPathComponent(UserManager.currentUser!.userId!)
         NSKeyedArchiver.archiveRootObject(self.arrayOfStoreInfo, toFile: filePath)
         
     }
@@ -152,28 +153,24 @@ class ListManager
                                 }
                                 
                                 
-                                //// 현재 보고있는 리스트의 저장정보 객체 생성 및 마지막 인덱스 저장 --> 해당 상세 내용을 볼 경우 해당 리스트도 저장할 예정
-                                self.currentStoreItem.lastIndexOfGetData = "\(maxIdx)"
-                                
-                                
                                 if keyForValue == "noticeList"
                                 {
-                                    self.storeInfo01_notice = self.currentStoreItem
+                                    self.storeInfo01_notice.lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "schoolInfoList"
                                 {
-                                    self.storeInfo04_schoolInfo = self.currentStoreItem
+                                    self.storeInfo04_schoolInfo.lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "lifeInfoList"
                                 {
-                                    self.storeInfo05_lifeInfo = self.currentStoreItem
+                                    self.storeInfo05_lifeInfo.lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 if keyForValue == "jobInfoList"
                                 {
-                                    self.storeInfo06_jobInfo = self.currentStoreItem
+                                    self.storeInfo06_jobInfo.lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
                                 // 파일로 현재 내역 저장
