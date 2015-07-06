@@ -58,7 +58,8 @@ class UserManager
             if let json : NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers, error: nil) as? NSDictionary
             {
                 
-                // 로그인 실패 시 리턴 처리 코드
+                // 로그인 실패 시 리턴 처리 코드  --> 응답 코드에 따라 해당 메시지를 뿌려줬으나 서버에서 에러메시지를 바로 내려줘서 수정하기로 함 --> 즉 이 소스는 참고용임
+                /*
                 if let resultCode = json.objectForKey("resultCode") as? String
                 {
                     if resultCode == "111"
@@ -77,6 +78,7 @@ class UserManager
                         return
                     }
                 }
+                */
                 
                 // 성공적으로 로그인 할 경우
                 if let loginData = json.objectForKey("data") as? NSDictionary
@@ -102,6 +104,11 @@ class UserManager
                         }
                         
                         callback(isSuccess: true, message: "단말기는 중복사용할 수 없습니다.")
+                        return
+                    }
+                    else if let errorMsg = loginData.objectForKey("errorMsg") as? String
+                    {
+                        callback(isSuccess: false, message: errorMsg)
                         return
                     }
                     

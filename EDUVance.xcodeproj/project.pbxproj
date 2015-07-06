@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050FBC2A1B4A9ED3006C09DA /* DetailWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050FBC291B4A9ED3006C09DA /* DetailWebViewVC.swift */; };
 		05564CB41B3BF4B700564A4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05564CB31B3BF4B700564A4C /* AppDelegate.swift */; };
 		05564CB91B3BF4B700564A4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05564CB71B3BF4B700564A4C /* Main.storyboard */; };
 		05564CBB1B3BF4B700564A4C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05564CBA1B3BF4B700564A4C /* Images.xcassets */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050FBC291B4A9ED3006C09DA /* DetailWebViewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailWebViewVC.swift; sourceTree = "<group>"; };
 		05564CAE1B3BF4B700564A4C /* EDUVance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDUVance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05564CB21B3BF4B700564A4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05564CB31B3BF4B700564A4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				05E45B011B3C84C4009CFD2B /* BaseNavigationC.swift */,
 				05E45B031B3C85CC009CFD2B /* ListVC.swift */,
 				05E45B051B3C8E14009CFD2B /* ListCell.swift */,
+				050FBC291B4A9ED3006C09DA /* DetailWebViewVC.swift */,
 			);
 			path = CustomLibrary;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				05564D041B3C02AD00564A4C /* HTTPUpload.swift in Sources */,
 				05E45B061B3C8E14009CFD2B /* ListCell.swift in Sources */,
 				05E45AFC1B3C7BE2009CFD2B /* Tab04MainView.swift in Sources */,
+				050FBC2A1B4A9ED3006C09DA /* DetailWebViewVC.swift in Sources */,
 				05E45B001B3C7CD0009CFD2B /* BaseItemView.swift in Sources */,
 				05E45B021B3C84C4009CFD2B /* BaseNavigationC.swift in Sources */,
 				05564CE81B3BF9E500564A4C /* UserManager.swift in Sources */,

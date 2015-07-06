@@ -11,6 +11,11 @@ import UIKit
 class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
     
     @IBOutlet weak var listTableView: UITableView!
+    
+    var currentIndexOfType = 0
+    var selectedIdx = ""
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -19,9 +24,12 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         println("리스트뷰 로딩 확인")
         
         let index = find( ConstantValues.iconTitleArray , self.topTitleLabel.text! )
+        
+        self.currentIndexOfType = index!
+        
         HWILib.showActivityIndicator(self)
         
-        switch index!
+        switch self.currentIndexOfType
         {
         case 0:
             // 공지사항 네트워크 시작
@@ -30,6 +38,7 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                 
                 if isSuccess
                 {
+                    ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
             }
@@ -40,6 +49,7 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                 
                 if isSuccess
                 {
+                    ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
             }
@@ -50,6 +60,7 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                 
                 if isSuccess
                 {
+                    ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
             }
@@ -61,6 +72,7 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                 
                 if isSuccess
                 {
+                    ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
             }
@@ -116,28 +128,65 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         
         cell.hwi_titleLabel.text = oneItem.wrTitle
         cell.hwi_contentLabel.text = oneItem.wrContent
+        cell.hwi_wrdateLabel.text = oneItem.wrDate
         
+        cell.hwi_dateLabel.hidden =  true
         if oneItem.startDate != nil && oneItem.endDate  != nil
         {
-            
-            cell.hwi_dateLabel.text = "\(oneItem.startDate!) - \(oneItem.endDate!)"
-            
-            if ( oneItem.startDate! == "" &&  oneItem.endDate! == "")
+            if oneItem.startDate != "" && oneItem.endDate  != ""
             {
-                cell.hwi_dateLabel.hidden =  true
-            }
-            else
-            {
-                cell.hwi_dateLabel.hidden =  false
+                
+                cell.hwi_dateLabel.text = "\(oneItem.startDate!) - \(oneItem.endDate!)"
+                cell.hwi_dateLabel.hidden = false
             }
         }
+        
+
+        
+        /// 읽었던 항목일 경우
+        if oneItem.isRead == true
+        {
+            println("읽은 리스트 입니다.")
+            cell.hwi_titleLabel.textColor = ConstantValues.color_main02_62_96_152_60per
+            cell.hwi_contentLabel.textColor = ConstantValues.color_main08_93_93_93_60per
+            cell.hwi_dateLabel.textColor = ConstantValues.color_main08_93_93_93_60per
+            cell.hwi_wrdateLabel.textColor = ConstantValues.color_main08_93_93_93_60per
+            cell.backgroundColor = ConstantValues.color_selectedList_246_246_246
+            if oneItem.importance != nil
+            {
+                if oneItem.importance! == "0"
+                {
+                    cell.hwi_titleLabel.textColor = ConstantValues.color_main02_62_96_152_60per
+                }
+                else if oneItem.importance! == "1"
+                {
+                    cell.hwi_titleLabel.textColor = ConstantValues.color_main07_232_24_92_60per
+                }
+            }
+        }
+        // 읽지 않은 항목일 경우
         else
         {
-            cell.hwi_dateLabel.hidden =  true
+            println("안 읽은 항목입니다.")
+            cell.hwi_titleLabel.textColor = ConstantValues.color_main02_62_96_152
+            cell.hwi_contentLabel.textColor = ConstantValues.color_main08_93_93_93
+            cell.hwi_dateLabel.textColor = ConstantValues.color_main08_93_93_93
+            cell.hwi_wrdateLabel.textColor = ConstantValues.color_main08_93_93_93
+            cell.backgroundColor = ConstantValues.color01_white
+            if oneItem.importance != nil
+            {
+                if oneItem.importance! == "0"
+                {
+                    cell.hwi_titleLabel.textColor = ConstantValues.color_main02_62_96_152
+                }
+                else if oneItem.importance! == "1"
+                {
+                    cell.hwi_titleLabel.textColor = ConstantValues.color_main07_232_24_92
+                }
+            }
         }
-        
-        
-        
+
+
         
         return cell
     }
@@ -147,5 +196,38 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
     {
         let oneItem = ListManager.commonList[indexPath.row]
         oneItem.isRead = true
+        
+        let currentItemObj = ListManager.arrayOfStoreInfo[self.currentIndexOfType]
+        
+        
+        // 현재 터치한 목록을 파일에 저장함
+        if find(currentItemObj.listOfReadIdx, oneItem.idx!) == nil
+        {
+            currentItemObj.listOfReadIdx.append(oneItem.idx!)
+            
+            // 파일 저장
+            ListManager.saveDataToFile()
+
+            // 파일에서 불러와서 적용
+            ListManager.applyReadData( self.currentIndexOfType )
+            
+            self.listTableView.reloadData()
+        }
+        self.selectedIdx = oneItem.idx!
+        self.performSegueWithIdentifier("list_webv_seg", sender: self)
+        
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "list_webv_seg"
+        {
+            let destVC = segue.destinationViewController as! DetailWebViewVC
+            destVC.topTtitleText = self.topTitleLabel.text!
+            destVC.currentType = self.currentIndexOfType
+            destVC.currentIdx = self.selectedIdx
+            
+        }
     }
 }

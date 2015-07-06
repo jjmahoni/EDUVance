@@ -36,12 +36,17 @@ class ConstantValues
     static let color02_black = UIColor.blackColor()
     static let color_main01_90_122_172 = HWILib.colorWIthRGB(90, green: 122, blue: 172, alpha: 1)
     static let color_main02_62_96_152 = HWILib.colorWIthRGB(62, green: 96, blue: 152, alpha: 1)
+    static let color_main02_62_96_152_60per = HWILib.colorWIthRGB(62, green: 96, blue: 152, alpha: 0.6)
     static let color_main03_230_234_242 = HWILib.colorWIthRGB(230, green: 234, blue: 242, alpha: 1)
     static let color_main04_134_156_190 = HWILib.colorWIthRGB(134, green: 156, blue: 190, alpha: 1)
     static let color_main05_60_78_106 = HWILib.colorWIthRGB(60, green: 78, blue: 106, alpha: 1)
     static let color_main06_32_60_102 = HWILib.colorWIthRGB(32, green: 60, blue: 102, alpha: 1)
     static let color_main07_232_24_92 = HWILib.colorWIthRGB(232, green: 24, blue: 92, alpha: 1)
+    static let color_main07_232_24_92_60per = HWILib.colorWIthRGB(232, green: 24, blue: 92, alpha: 0.6)
     static let color_main08_93_93_93 = HWILib.colorWIthRGB(93, green: 93, blue: 93, alpha: 1)
+    static let color_main08_93_93_93_60per = HWILib.colorWIthRGB(93, green: 93, blue: 93, alpha: 0.6)
+    
+    static let color_selectedList_246_246_246 = HWILib.colorWIthRGB(246, green: 246, blue: 246, alpha: 1)
     
     static let color_pageIndicatorOffState_194_205_227 = HWILib.colorWIthRGB(194, green: 205, blue: 227, alpha: 1)
 

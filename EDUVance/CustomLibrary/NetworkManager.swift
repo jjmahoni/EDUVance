@@ -49,12 +49,16 @@ class NetworkManager
     pageNo            /* 페이지번호(기본값 1) */
     pageLimit         /* 페이지당 갯수(기본값 10) */
     */
+
+    static let URL04_GET_DETAIL_NOTICE : String  = "/app/community/notice_detail.php"
+    
     
     static let URL11_GET_SCHOOL_INFO_LIST : String  = "/app/community/school_info_list.php"
-    
+    static let URL12_GET_DETAIL_SCHOOL_INFO : String  = "/app/community/school_info_detail.php"
     static let URL13_GET_LIFE_INFO_LIST : String  = "/app/community/life_info_list.php"
-    
+    static let URL14_GET_DETAIL_LIFE_INFO : String  = "/app/community/life_info_detail.php"
     static let URL15_GET_JOB_INFO_LIST : String  = "/app/community/job_info_list.php"
+    static let URL16_GET_DETAIL_JOB_INFO : String  = "/app/community/job_info_detail.php"
 
     
     
@@ -77,6 +81,8 @@ class NetworkManager
         
         request.POST(SERVER_HOST+URL01_LOGIN, parameters: params) { (response : HTTPResponse) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+
                 if let err = response.error
                 {
                     callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
@@ -148,61 +154,8 @@ class NetworkManager
     }
     
 
-    
-    class func getNoticeList( pageNo : String, pageLimit : String, callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
-    {
-        if !HWILib.isConnectedToNetwork()
-        {
-            callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
-            return
-        }
-        
-        var request = HTTPTask()
-        
-        let params : Dictionary<String, AnyObject> = [
-            "userType" : UserManager.currentUser!.userType! ,
-            "userId" : UserManager.currentUser!.userId! ,
-            "accessToken" : UserManager.currentUser!.accessToken! ,
-            "pageNo" : pageNo ,
-            "pageLimit" : pageLimit
-        ]
-        
-        request.POST( SERVER_HOST + URL03_GET_NOTICE_LIST , parameters: params) { (response : HTTPResponse) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-                if let err = response.error
-                {
-                    callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
-                    return
-                }
-                
-                if let data = response.responseObject as? NSData
-                {
-                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("공지사항 조회 디버그 스트링 : \(str)")
-                    
-                    callback(isSuccess: true, result: "성공적으로 메뉴 가져옴", jsonData: data)
-                    
-                }
-                
-            })
-        }
-    }
 
-    
-    // 학교 정보 가져오기
-    class func getSchoolInfoList(  callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
-    {
-        getCommonListInfo(SERVER_HOST + URL11_GET_SCHOOL_INFO_LIST, callback: callback)
-    }
-    
-    
-    // 생활정보 가저요기
-    class func getLifeInfoList(  callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
-    {
-        getCommonListInfo(SERVER_HOST + URL13_GET_LIFE_INFO_LIST, callback: callback)
-    }
-    
+
     
     
     
@@ -234,16 +187,80 @@ class NetworkManager
                 if let data = response.responseObject as? NSData
                 {
                     let str = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("학교정보 조회 디버그 스트링 : \(str)")
+                    println("리스트 관련 네트워크 조회 디버그 스트링 : \(str)")
                     
-                    callback(isSuccess: true, result: "성공적으로 메뉴 가져옴", jsonData: data)
+                    callback(isSuccess: true, result: "성공적으로 리스트 가져옴", jsonData: data)
                     
                 }
                 
             })
         }
+    }
+    
+    
+    
+    /// 일반적인 상세 웹뷰 조회 시 모두 함께 사용
+    class func getCommonDetailWeb( detailViewType : Int , inputIdx : String , callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
         
         
+        var urlForWebView = ""
+        
+        switch detailViewType
+        {
+        case 0:
+            println("공지사항 입니다.")
+            urlForWebView = NetworkManager.URL04_GET_DETAIL_NOTICE
+        case 3:
+            println("학교정보 입니다.")
+            urlForWebView = NetworkManager.URL12_GET_DETAIL_SCHOOL_INFO
+        case 4:
+            println("생활정보 입니다.")
+            urlForWebView = NetworkManager.URL14_GET_DETAIL_LIFE_INFO
+        case 5:
+            println("취업정보 입니다.")
+            urlForWebView = NetworkManager.URL16_GET_DETAIL_JOB_INFO
+        default:
+            break
+        }
+        
+        
+        if !HWILib.isConnectedToNetwork()
+        {
+            callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
+            return
+        }
+        
+        var request = HTTPTask()
+        
+        let params : Dictionary<String, AnyObject> = [
+            "userType" : UserManager.currentUser!.userType! ,
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken!,
+            "idx" : inputIdx
+        ]
+
+        
+        request.POST( SERVER_HOST+urlForWebView , parameters: params) { (response : HTTPResponse) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if let err = response.error
+                {
+                    callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
+                    return
+                }
+                
+                if let data = response.responseObject as? NSData
+                {
+                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("상세 웹뷰 조회 디버그 스트링 : \(str)")
+                    
+                    callback(isSuccess: true, result: "성공적으로 상세웹뷰 내용 가져옴", jsonData: data)
+                    
+                }
+                
+            })
+        }
     }
     
 }

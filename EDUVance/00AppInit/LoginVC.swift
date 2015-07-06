@@ -71,6 +71,7 @@ class LoginVC: BaseVC , UITextFieldDelegate{
         
         UserManager.sharedInstance.login(inputId, inputPw: inputPw, isAutoLogin: btn01_autoLogin.selected) { (isSuccess, message) -> () in
             
+            HWILib.hideActivityIndicator()
             if isSuccess
             {
                 self.dismissViewControllerAnimated(true, completion: { () -> Void in

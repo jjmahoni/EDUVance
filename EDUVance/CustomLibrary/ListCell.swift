@@ -14,6 +14,7 @@ class ListCell: UITableViewCell {
     @IBOutlet weak var hwi_newImageView: UIImageView!
     @IBOutlet weak var hwi_dateLabel: UILabel!
     @IBOutlet weak var hwi_contentLabel: UILabel!
+    @IBOutlet weak var hwi_wrdateLabel: UILabel!
     
     
     
