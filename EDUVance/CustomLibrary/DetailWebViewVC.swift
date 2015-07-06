@@ -76,6 +76,22 @@ class DetailWebViewVC: BaseVC {
         self.checkBoxBtn01_endAlarm.image = checkbox_n_img
         }
     }
+    
+    
+
+    @IBAction func onCheckBoxBtn02_endAlarm_touchupInside(sender: UIButton)
+    {
+        if self.checkBoxBtn02_registSchedule.image == checkbox_n_img
+        {
+            self.checkBoxBtn02_registSchedule.image = checkbox_p_img
+        }
+        else
+        {
+            self.checkBoxBtn02_registSchedule.image = checkbox_n_img
+        }
+    
+    }
+    
 
 
     override func onBackBtnTouch(sender: UIButton) {
