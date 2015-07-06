@@ -9,11 +9,11 @@
 import UIKit
 
 class DetailWebViewVC: BaseVC {
-
+    
     var topTtitleText = ""
     var currentType = 0
     var currentIdx = ""
-
+    
     @IBOutlet weak var hwi_title: UILabel!
     @IBOutlet weak var hwi_dateLabel: UILabel!
     @IBOutlet weak var hwi_webview: UIWebView!
@@ -36,7 +36,7 @@ class DetailWebViewVC: BaseVC {
         self.topTitleLabel.text = self.topTtitleText
         
         
-
+        
         
         
         //상세 내용 불러오기
@@ -45,7 +45,18 @@ class DetailWebViewVC: BaseVC {
             if isSuccess
             {
                 self.hwi_title.text = ListManager.commonDetailObject.wrTitle
-                self.hwi_dateLabel.text = "일정   \(ListManager.commonDetailObject.startDate!) - \(ListManager.commonDetailObject.endDate!)"
+                
+                if ListManager.commonDetailObject.startDate == nil || ListManager.commonDetailObject.startDate == ""
+                {
+                    self.hwi_dateLabel.hidden = true
+                }
+                else
+                {
+                    self.hwi_dateLabel.hidden = false
+                    self.hwi_dateLabel.text = "일정   \(ListManager.commonDetailObject.startDate!) - \(ListManager.commonDetailObject.endDate!)"
+                }
+                
+                
                 self.hwi_webview.loadHTMLString(ListManager.commonDetailObject.wrContent, baseURL: NSURL())
             }
             else
@@ -55,30 +66,30 @@ class DetailWebViewVC: BaseVC {
                 })
             }
         }
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-
+    
+    
     @IBAction func onCheckBoxBtn01_endAlarm_touchupInside(sender: UIButton)
     {
         if self.checkBoxBtn01_endAlarm.image == checkbox_n_img
         {
-        self.checkBoxBtn01_endAlarm.image = checkbox_p_img
+            self.checkBoxBtn01_endAlarm.image = checkbox_p_img
         }
         else
         {
-        self.checkBoxBtn01_endAlarm.image = checkbox_n_img
+            self.checkBoxBtn01_endAlarm.image = checkbox_n_img
         }
     }
     
     
-
+    
     @IBAction func onCheckBoxBtn02_endAlarm_touchupInside(sender: UIButton)
     {
         if self.checkBoxBtn02_registSchedule.image == checkbox_n_img
@@ -89,11 +100,11 @@ class DetailWebViewVC: BaseVC {
         {
             self.checkBoxBtn02_registSchedule.image = checkbox_n_img
         }
-    
+        
     }
     
-
-
+    
+    
     override func onBackBtnTouch(sender: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
