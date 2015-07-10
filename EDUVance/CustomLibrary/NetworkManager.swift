@@ -14,41 +14,11 @@ class NetworkManager
     
     
     static let URL01_LOGIN : String = "/app/user/login.php"
-    /*
-    [필수]
-    userId            /* 아이디 */
-    password       /* 비밀번호 */
-    deviceId        /* 단말기 고유정보 */
-    */
-    
+    static let URL01_01_SEND_DEVICE_TOKEN : String = "/app/user/save_user_info.php"
     
     static let URL02_GET_MAIN_MENU : String  = "/app/community/information.php"
-    /*
-    [필수]
-    userType                  /* 사용자 유형(S:학생, P:교강사) */
-    userId                      /* 아이디 */
-    accessToken            /* login key */
-    
-    [옵션]
-    noticeIdx             /* 공지사항 마지막 고유번호 */
-    scheduleIdx         /* 학사일정 마지막 고유번호 */
-    schoolInfoIdx       /* 학교 정보 마지막 고유번호 */
-    lifeInfoIdx            /* 생활 정보 마지막 고유번호 */
-    jobInfoIdx           /* 취업 정보 마지막 고유번호 */
-    */
-    
     
     static let URL03_GET_NOTICE_LIST : String  = "/app/community/notice_list.php"
-    /*
-    [필수]
-    userType                  /* 사용자 유형(S:학생, P:교강사) */
-    userId                      /* 아이디 */
-    accessToken            /* login key */
-    
-    [옵션]
-    pageNo            /* 페이지번호(기본값 1) */
-    pageLimit         /* 페이지당 갯수(기본값 10) */
-    */
 
     static let URL04_GET_DETAIL_NOTICE : String  = "/app/community/notice_detail.php"
     
@@ -105,6 +75,53 @@ class NetworkManager
 
     }
     
+    
+    
+    
+    // 푸시노티피케이션 토큰 서버로 보냄
+    class func sendAPNSKey(callback : ( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        
+        if !HWILib.isConnectedToNetwork()
+        {
+            callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
+            return
+        }
+        
+        var request = HTTPTask()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let params : Dictionary<String, AnyObject> = [
+            "userType" : UserManager.currentUser!.userType! ,
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken! ,
+            "osType" : "I" ,
+            "pushKey" : appDelegate.deviceTokenIdString
+        ]
+        
+        request.POST(SERVER_HOST + URL01_01_SEND_DEVICE_TOKEN, parameters: params) { (response : HTTPResponse) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if let err = response.error
+                {
+                    callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
+                    return
+                }
+                
+                if let data = response.responseObject as? NSData
+                {
+                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("pushKey 등록 후 응답 String : \(str)")
+                    
+                    callback(isSuccess: true, result: "성공적으로 push key 등록", jsonData: data)
+                    
+                }
+                
+            })
+        }
+        
+    }
     
     
     // 메뉴 조회

@@ -33,6 +33,7 @@
 		05564D061B3C02AD00564A4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 05564CF51B3C02AD00564A4C /* LICENSE */; };
 		05564D071B3C02AD00564A4C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 05564CF61B3C02AD00564A4C /* README.md */; };
 		05564D081B3C02AD00564A4C /* SwiftHTTP.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 05564CF81B3C02AD00564A4C /* SwiftHTTP.podspec */; };
+		0560B8721B4E25A7004751C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0560B8711B4E25A7004751C5 /* NotificationManager.swift */; };
 		059744C41B3C2A1100532554 /* Tab02MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059744C31B3C2A1100532554 /* Tab02MainView.swift */; };
 		05CC7AC61B47F93900F70327 /* ModelForStoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CC7AC51B47F93900F70327 /* ModelForStoreData.swift */; };
 		05E45AF81B3C7BC5009CFD2B /* Tab01MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E45AF71B3C7BC5009CFD2B /* Tab01MainView.swift */; };
@@ -116,6 +117,7 @@
 		05564CF71B3C02AD00564A4C /* SwiftHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftHTTP.h; sourceTree = "<group>"; };
 		05564CF81B3C02AD00564A4C /* SwiftHTTP.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SwiftHTTP.podspec; sourceTree = "<group>"; };
 		05564CF91B3C02AD00564A4C /* SwiftHTTP.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftHTTP.xcodeproj; sourceTree = "<group>"; };
+		0560B8711B4E25A7004751C5 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		059744C31B3C2A1100532554 /* Tab02MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab02MainView.swift; sourceTree = "<group>"; };
 		05CC7AC51B47F93900F70327 /* ModelForStoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelForStoreData.swift; sourceTree = "<group>"; };
 		05E45AF71B3C7BC5009CFD2B /* Tab01MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab01MainView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				05E45B031B3C85CC009CFD2B /* ListVC.swift */,
 				05E45B051B3C8E14009CFD2B /* ListCell.swift */,
 				050FBC291B4A9ED3006C09DA /* DetailWebViewVC.swift */,
+				0560B8711B4E25A7004751C5 /* NotificationManager.swift */,
 			);
 			path = CustomLibrary;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				05564CE81B3BF9E500564A4C /* UserManager.swift in Sources */,
 				05564D001B3C02AD00564A4C /* HTTPRequestSerializer.swift in Sources */,
 				05564CE51B3BF95700564A4C /* InsetTextField.swift in Sources */,
+				0560B8721B4E25A7004751C5 /* NotificationManager.swift in Sources */,
 				05E45B081B3C97B5009CFD2B /* ListManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,6 +548,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
