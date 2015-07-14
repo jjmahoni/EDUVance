@@ -40,6 +40,51 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJX-Pl-1P1" userLabel="하단 바">
+                                                <rect key="frame" x="0.0" y="358" width="600" height="242"/>
+                                                <subviews>
+                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_bg_illust" translatesAutoresizingMaskIntoConstraints="NO" id="zAU-I9-MIx" userLabel="하단 일러스트">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="188"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="zAU-I9-MIx" secondAttribute="height" multiplier="150:47" id="yUq-dZ-go0"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wc1-Ie-YnU" userLabel="카피라이트 뷰">
+                                                        <rect key="frame" x="0.0" y="188" width="600" height="54"/>
+                                                        <subviews>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="하단 카피라이트 테스트" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0d-Og-6oi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="54" id="vnW-yg-o3q"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                <color key="textColor" red="0.24313725489999999" green="0.37647058820000001" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.52549019610000003" green="0.61176470589999998" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="54" id="5QA-rh-vTY"/>
+                                                            <constraint firstItem="R0d-Og-6oi" firstAttribute="leading" secondItem="Wc1-Ie-YnU" secondAttribute="leading" id="L57-HD-9Iz"/>
+                                                            <constraint firstAttribute="trailing" secondItem="R0d-Og-6oi" secondAttribute="trailing" id="PHL-96-aC1"/>
+                                                            <constraint firstAttribute="bottom" secondItem="R0d-Og-6oi" secondAttribute="bottom" id="jch-sI-dUR"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="zAU-I9-MIx" firstAttribute="leading" secondItem="dJX-Pl-1P1" secondAttribute="leading" id="BaL-lT-itk"/>
+                                                    <constraint firstItem="Wc1-Ie-YnU" firstAttribute="top" secondItem="zAU-I9-MIx" secondAttribute="bottom" id="Bxw-eD-muI"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Wc1-Ie-YnU" secondAttribute="bottom" id="Ep2-Oa-kIB"/>
+                                                    <constraint firstItem="zAU-I9-MIx" firstAttribute="top" secondItem="dJX-Pl-1P1" secondAttribute="top" id="Kfm-fI-ZQi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zAU-I9-MIx" secondAttribute="trailing" id="M46-Vj-57r"/>
+                                                    <constraint firstItem="Wc1-Ie-YnU" firstAttribute="leading" secondItem="dJX-Pl-1P1" secondAttribute="leading" id="Vgh-zC-DDM"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Wc1-Ie-YnU" secondAttribute="trailing" id="bCI-gR-p8T"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQ1-mv-A0p" userLabel="로그인박스">
                                                 <rect key="frame" x="174" y="250" width="252" height="234"/>
                                                 <subviews>
@@ -146,51 +191,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="234" id="7El-Kg-wKD"/>
                                                     <constraint firstAttribute="width" constant="252" id="bza-RA-i3x"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJX-Pl-1P1" userLabel="하단 바">
-                                                <rect key="frame" x="0.0" y="358" width="600" height="242"/>
-                                                <subviews>
-                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_bg_illust" translatesAutoresizingMaskIntoConstraints="NO" id="zAU-I9-MIx" userLabel="하단 일러스트">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="188"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="zAU-I9-MIx" secondAttribute="height" multiplier="150:47" id="yUq-dZ-go0"/>
-                                                        </constraints>
-                                                    </imageView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wc1-Ie-YnU" userLabel="카피라이트 뷰">
-                                                        <rect key="frame" x="0.0" y="188" width="600" height="54"/>
-                                                        <subviews>
-                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="하단 카피라이트 테스트" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0d-Og-6oi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="54" id="vnW-yg-o3q"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                                <color key="textColor" red="0.24313725489999999" green="0.37647058820000001" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" red="0.52549019610000003" green="0.61176470589999998" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="54" id="5QA-rh-vTY"/>
-                                                            <constraint firstItem="R0d-Og-6oi" firstAttribute="leading" secondItem="Wc1-Ie-YnU" secondAttribute="leading" id="L57-HD-9Iz"/>
-                                                            <constraint firstAttribute="trailing" secondItem="R0d-Og-6oi" secondAttribute="trailing" id="PHL-96-aC1"/>
-                                                            <constraint firstAttribute="bottom" secondItem="R0d-Og-6oi" secondAttribute="bottom" id="jch-sI-dUR"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstItem="zAU-I9-MIx" firstAttribute="leading" secondItem="dJX-Pl-1P1" secondAttribute="leading" id="BaL-lT-itk"/>
-                                                    <constraint firstItem="Wc1-Ie-YnU" firstAttribute="top" secondItem="zAU-I9-MIx" secondAttribute="bottom" id="Bxw-eD-muI"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Wc1-Ie-YnU" secondAttribute="bottom" id="Ep2-Oa-kIB"/>
-                                                    <constraint firstItem="zAU-I9-MIx" firstAttribute="top" secondItem="dJX-Pl-1P1" secondAttribute="top" id="Kfm-fI-ZQi"/>
-                                                    <constraint firstAttribute="trailing" secondItem="zAU-I9-MIx" secondAttribute="trailing" id="M46-Vj-57r"/>
-                                                    <constraint firstItem="Wc1-Ie-YnU" firstAttribute="leading" secondItem="dJX-Pl-1P1" secondAttribute="leading" id="Vgh-zC-DDM"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Wc1-Ie-YnU" secondAttribute="trailing" id="bCI-gR-p8T"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
