@@ -25,12 +25,10 @@ class Tab01MainView: BaseItemView
             let heightOfCellMultiple = endPointX.toInt()! - startPointX.toInt()!
             self.frame = CGRectMake(widthOfOneCell + CGFloat( CGFloat(startPointY.toInt()!) * widthOfOneCell), CGFloat( CGFloat(startPointX.toInt()!) * heightOfOneCell), widthOfOneCell , CGFloat(heightOfCellMultiple) * heightOfOneCell)
             
-            println("백그라운드 컬러 : \(backgroundColorString)")
             self.backgroundColor = UIColor(rgba: backgroundColorString)
             
             let widthOfOneTitle = widthOfOneCell - (widthMarginOfTitle*2)
-            println("셀 크기 : \(widthOfOneCell)")
-            println("셀 타이틀의 가로 크기 : \(widthOfOneTitle)")
+
             
 
             
@@ -135,7 +133,7 @@ class Tab01MainView: BaseItemView
                 self.titleLabel.frame = CGRectMake(0, ConstantValues.statusBarHeight, self.frame.size.width, self.heightOfTitleLabel)
                 self.titleLabel.backgroundColor = ConstantValues.color01_white
                 self.titleLabel.text = "\(TimeTableManager.year) 학년도 제 \(TimeTableManager.semester) 학기"
-                self.titleLabel.textColor = ConstantValues.color_main07_232_24_92
+
                 self.titleLabel.font = UIFont.boldSystemFontOfSize(self.fontSizeOfTitle)
                 self.titleLabel.textAlignment = NSTextAlignment.Center
                 
@@ -151,6 +149,7 @@ class Tab01MainView: BaseItemView
                     let oneFirstCell = UILabel()
                     oneFirstCell.textAlignment = NSTextAlignment.Center
                     oneFirstCell.text = oneCellFirstTitle
+
                     oneFirstCell.textColor = ConstantValues.color02_black
                     oneFirstCell.frame = CGRectMake( CGFloat(index) * self.widthOfOneCell, yOffsetOfFirstCell, self.widthOfOneCell, self.heightOfFirstCell)
                     self.addSubview(oneFirstCell)
@@ -188,6 +187,7 @@ class Tab01MainView: BaseItemView
                     oneTimeCell.textAlignment = NSTextAlignment.Center
                     oneTimeCell.text = oneTime
                     oneTimeCell.textColor = ConstantValues.color02_black
+                    oneTimeCell.backgroundColor = ConstantValues.color_main08_93_93_93
                     oneTimeCell.frame = CGRectMake(0, (self.heightOfOneCell * CGFloat(index)), self.widthOfOneCell, self.heightOfOneCell)
                     self.containerViewInScroll.addSubview(oneTimeCell)
                 }
