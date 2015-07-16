@@ -101,7 +101,7 @@
                                                         <rect key="frame" x="86" y="48" width="80" height="2"/>
                                                         <color key="backgroundColor" red="0.12549019610000001" green="0.23529411759999999" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu002" placeholder="학번을 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S73-KV-m5z" userLabel="아이디 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu001" placeholder="학번을 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S73-KV-m5z" userLabel="아이디 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
                                                         <rect key="frame" x="30" y="74" width="193" height="28"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -123,7 +123,7 @@
                                                             <outlet property="delegate" destination="idO-z0-FvL" id="iZh-rB-IPG"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu002" placeholder="비밀번호를 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-t3-ytW" userLabel="패스워드 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="stu001" placeholder="비밀번호를 입력하세요" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-t3-ytW" userLabel="패스워드 텍스트필드" customClass="InsetTextField" customModule="EDUVance" customModuleProvider="target">
                                                         <rect key="frame" x="29" y="111" width="193" height="28"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -540,6 +540,7 @@
                     <connections>
                         <outlet property="listTableView" destination="L90-jG-CNA" id="eGX-lV-YjD"/>
                         <segue destination="bUT-PS-ipp" kind="show" identifier="list_webv_seg" id="zWu-Cl-EeO"/>
+                        <segue destination="idO-z0-FvL" kind="presentation" identifier="seg_listvc_login" id="s18-e0-8za"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1A-0d-orL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -742,6 +743,7 @@
                         <outlet property="hwi_dateLabel" destination="zsm-wx-igx" id="Nem-0n-bkM"/>
                         <outlet property="hwi_title" destination="VLm-NY-Y7i" id="0B2-ZE-hdc"/>
                         <outlet property="hwi_webview" destination="8af-5E-bXb" id="FPA-B5-xgF"/>
+                        <segue destination="idO-z0-FvL" kind="presentation" identifier="seg_detailWeb_login" id="HQ0-lw-bMW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h52-eV-f7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -779,4 +781,7 @@
         <image name="loginBgNormal" width="1" height="1"/>
         <image name="loginBgOn" width="1" height="1"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="z61-VP-Wq6"/>
+    </inferredMetricsTieBreakers>
 </document>

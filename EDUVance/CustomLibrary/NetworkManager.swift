@@ -23,6 +23,8 @@ class NetworkManager
     static let URL04_GET_DETAIL_NOTICE : String  = "/app/community/notice_detail.php"
     
     
+    static let URL10_GET_TIME_TABLE : String  = "/app/lecture/class_schedule.php"
+    
     static let URL11_GET_SCHOOL_INFO_LIST : String  = "/app/community/school_info_list.php"
     static let URL12_GET_DETAIL_SCHOOL_INFO : String  = "/app/community/school_info_detail.php"
     static let URL13_GET_LIFE_INFO_LIST : String  = "/app/community/life_info_list.php"
@@ -278,6 +280,53 @@ class NetworkManager
                 
             })
         }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    class func getTimeTable(callback :( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        if !HWILib.isConnectedToNetwork()
+        {
+            callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
+            return
+        }
+        
+        var request = HTTPTask()
+        
+        let params : Dictionary<String, AnyObject> = [
+            "userId" : UserManager.currentUser!.userId! ,
+            "accessToken" : UserManager.currentUser!.accessToken!
+        ]
+        
+        
+        request.POST( SERVER_HOST + URL10_GET_TIME_TABLE , parameters: params) { (response : HTTPResponse) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if let err = response.error
+                {
+                    callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
+                    return
+                }
+                
+                if let data = response.responseObject as? NSData
+                {
+                    let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("시간표 조회 디버그 스트링 : \(str)")
+                    
+                    callback(isSuccess: true, result: "성공적으로 시간표 데이터 가져옴", jsonData: data)
+                    
+                }
+                
+            })
+        }
+   
     }
     
 }

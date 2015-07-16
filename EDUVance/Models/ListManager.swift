@@ -191,9 +191,15 @@ class ListManager
                     }
                     else
                     {
-                        callback(isSuccess: false, result: "JSON 서버에서 false 보냄")
+                        println("액세스토큰이 만료된 것으로 보임1")
+                        callback(isSuccess: false, result: "액세스 토큰이 만료되어 로그인 화면으로 이동합니다.")
                     }
                     
+                }
+                else
+                {
+                    println("액세스토큰이 만료된 것으로 보임2")
+                    callback(isSuccess: false, result: "액세스 토큰이 만료되어 로그인 화면으로 이동합니다.")
                 }
             }
         })
@@ -303,6 +309,12 @@ class ListManager
                     }
                     
                     
+                    
+                }
+                else
+                {
+                // 액세스 토큰 만료
+                    callback(isSuccess: false, result: "액세스토큰이 만료되었습니다. 다시 로그인 해 주세요")
                     
                 }
             }

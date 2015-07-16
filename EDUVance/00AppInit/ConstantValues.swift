@@ -50,7 +50,7 @@ class ConstantValues
     
     static let color_pageIndicatorOffState_194_205_227 = HWILib.colorWIthRGB(194, green: 205, blue: 227, alpha: 1)
 
-    
+    static let statusBarHeight: CGFloat = 20
     
 
 }

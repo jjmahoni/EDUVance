@@ -16,7 +16,7 @@ class BaseVC: UIViewController
     let backBtnTemp : UIButton = UIButton()
     
     let topToteBarHeight : CGFloat = 68
-    let statusBarHeight: CGFloat = 20
+
 
     
     
@@ -85,13 +85,13 @@ class BaseVC: UIViewController
         
         self.topTitleBar.frame = CGRectMake(0, 0, self.view.frame.size.width, topToteBarHeight)
         self.topTitleBar.backgroundColor = ConstantValues.color_main01_90_122_172
-        self.topTitleLabel.frame = CGRectMake(0, statusBarHeight, self.topTitleBar.frame.size.width, topToteBarHeight-statusBarHeight)
+        self.topTitleLabel.frame = CGRectMake(0, ConstantValues.statusBarHeight, self.topTitleBar.frame.size.width, topToteBarHeight-ConstantValues.statusBarHeight)
         
         self.topTitleLabel.textColor = ConstantValues.color01_white
         self.topTitleLabel.font = UIFont.boldSystemFontOfSize(18.0)
         
         
-        backBtnTemp.frame = CGRectMake(10, statusBarHeight , 60, topToteBarHeight-statusBarHeight)
+        backBtnTemp.frame = CGRectMake(10, ConstantValues.statusBarHeight , 60, topToteBarHeight-ConstantValues.statusBarHeight)
         
 
         backBtnTemp.setTitle("Back", forState: UIControlState.Normal)

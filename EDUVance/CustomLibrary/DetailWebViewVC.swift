@@ -37,7 +37,11 @@ class DetailWebViewVC: BaseVC {
         
         
         
-        
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         //상세 내용 불러오기
         ListManager.getDetailArticle(self.currentType, inputIdx: self.currentIdx) { (isSuccess, result) -> () in
@@ -61,12 +65,13 @@ class DetailWebViewVC: BaseVC {
             }
             else
             {
-                self.alertWithTitle(result, clickString: "뒤로 돌아가기", clickHandler: { () -> Void in
-                    self.navigationController?.popViewControllerAnimated(true)
+                self.alertWithTitle(result, clickString: "확인", clickHandler: { () -> Void in
+                    
+                    self.performSegueWithIdentifier("seg_detailWeb_login", sender: self)
                 })
             }
         }
-        
+
     }
     
     override func didReceiveMemoryWarning() {

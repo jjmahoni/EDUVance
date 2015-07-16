@@ -15,5 +15,20 @@ class BaseItemView: UIView
     {
     
     }
+    
+    func onViewLoad()
+    {
+    
+    }
+    
+    func moveToLogin()
+    {
+        self.viewController!.alertWithTitle("액세스토큰이 만료되었습니다. 다시 로그인 해 주세요", clickString: "로그인으로 이동", clickHandler: { () -> Void in
+            if let mainVC = self.viewController! as? MainVC
+            {
+                mainVC.performSegueWithIdentifier("main_login_seg", sender: mainVC)
+            }
+        })
+    }
 
 }

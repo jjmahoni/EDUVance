@@ -57,7 +57,10 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         
         HWILib.delay(0.1, closure: { () -> () in
             
-            self.itemView02.onViewLoad()
+            for oneItemView in self.itemViews
+            {
+                oneItemView.onViewLoad()
+            }
             self.setBackgroundIllust()
             self.mainScrollView.contentSize = self.mainContainerView.frame.size
         })
@@ -77,14 +80,17 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         }
         else
         {
+            // 처음 앱 실행 시 2번 탭으로 시작함
             if isFirstLoad
             {
                 self.changeTabWithIndex(1  , wantAnimation : false)
                 self.isFirstLoad = false
             }
-            
-            self.itemViews[self.pageControlView.currentPage].onViewShow()
-            
+            else
+            {
+                // 현재 화면으로 돌아올 경우 refresh
+                self.itemViews[self.pageControlView.currentPage].onViewShow()
+            }
             
         }
         
@@ -117,6 +123,7 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         self.itemViews = [itemView01 ,itemView02 ,itemView03 ,itemView04 ]
         self.tabBarBtns = [tab01Btn,tab02Btn,tab03Btn,tab04Btn]
         
+        // 각 아이템 뷰들에게 부모 뷰 컨트롤러 할당해줌 ( viewController )
         for oneItemView in itemViews
         {
             oneItemView.viewController = self

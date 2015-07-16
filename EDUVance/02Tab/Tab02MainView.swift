@@ -34,9 +34,12 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     }
 
 
-    func onViewLoad()
+    
+    
+    override func onViewLoad()
     {
-            initViews()
+        super.onViewLoad()
+        initViews()
     }
     
     
@@ -143,14 +146,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
                     else if resultCode == "999"
                     {
                         println("액세스토큰이 만료된 것으로 보임")
-
-                        
-                        self.viewController!.alertWithTitle("액세스토큰이 만료되었습니다. 다시 로그인 해 주세요", clickString: "로그인으로 이동", clickHandler: { () -> Void in
-                            if let mainVC = self.viewController! as? MainVC
-                            {
-                                mainVC.performSegueWithIdentifier("main_login_seg", sender: mainVC)
-                            }
-                        })
+                        self.moveToLogin()
                     }
                 }
             } // -> JSON 파싱 종료

@@ -29,6 +29,13 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         
         HWILib.showActivityIndicator(self)
         
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
         switch self.currentIndexOfType
         {
         case 0:
@@ -41,6 +48,10 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                     ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
+                else
+                {
+                    self.showLoginScreen(result)
+                }
             }
         case 3:
             // 학교정보 네트워크 시작
@@ -52,6 +63,10 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                     ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
+                else
+                {
+                    self.showLoginScreen(result)
+                }
             }
         case 4:
             // 학교정보 네트워크 시작
@@ -62,6 +77,10 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                 {
                     ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
+                }
+                else
+                {
+                    self.showLoginScreen(result)
                 }
             }
             
@@ -75,23 +94,18 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                     ListManager.applyReadData(self.currentIndexOfType)
                     self.listTableView.reloadData()
                 }
+                else
+                {
+                    self.showLoginScreen(result)
+                }
             }
             
             
             
         default:
-           break
+            break
         }
-        
-        
-        
-        
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        
+  
         
     }
     
@@ -229,5 +243,14 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
             destVC.currentIdx = self.selectedIdx
             
         }
+    }
+    
+    func showLoginScreen(result : String)
+    {
+        self.alertWithTitle(result, clickString: "확인", clickHandler: { () -> Void in
+            
+            self.performSegueWithIdentifier("seg_listvc_login", sender: self)
+            
+        })
     }
 }

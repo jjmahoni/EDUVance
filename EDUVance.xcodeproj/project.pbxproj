@@ -36,6 +36,8 @@
 		0560B8721B4E25A7004751C5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0560B8711B4E25A7004751C5 /* NotificationManager.swift */; };
 		059744C41B3C2A1100532554 /* Tab02MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059744C31B3C2A1100532554 /* Tab02MainView.swift */; };
 		05CC7AC61B47F93900F70327 /* ModelForStoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CC7AC51B47F93900F70327 /* ModelForStoreData.swift */; };
+		05D6D0AE1B5786F900F8DC73 /* TimeTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D6D0AD1B5786F900F8DC73 /* TimeTableManager.swift */; };
+		05D6D0B41B57A40400F8DC73 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D6D0B31B57A40400F8DC73 /* UIColorExtension.swift */; };
 		05E45AF81B3C7BC5009CFD2B /* Tab01MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E45AF71B3C7BC5009CFD2B /* Tab01MainView.swift */; };
 		05E45AFA1B3C7BD1009CFD2B /* Tab03MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E45AF91B3C7BD1009CFD2B /* Tab03MainView.swift */; };
 		05E45AFC1B3C7BE2009CFD2B /* Tab04MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E45AFB1B3C7BE2009CFD2B /* Tab04MainView.swift */; };
@@ -120,6 +122,8 @@
 		0560B8711B4E25A7004751C5 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		059744C31B3C2A1100532554 /* Tab02MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab02MainView.swift; sourceTree = "<group>"; };
 		05CC7AC51B47F93900F70327 /* ModelForStoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelForStoreData.swift; sourceTree = "<group>"; };
+		05D6D0AD1B5786F900F8DC73 /* TimeTableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableManager.swift; sourceTree = "<group>"; };
+		05D6D0B31B57A40400F8DC73 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		05E45AF71B3C7BC5009CFD2B /* Tab01MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab01MainView.swift; sourceTree = "<group>"; };
 		05E45AF91B3C7BD1009CFD2B /* Tab03MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab03MainView.swift; sourceTree = "<group>"; };
 		05E45AFB1B3C7BE2009CFD2B /* Tab04MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab04MainView.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 			children = (
 				05564CED1B3C02AD00564A4C /* SwiftHTTP-master */,
 				05564CE41B3BF95700564A4C /* InsetTextField.swift */,
+				05D6D0B31B57A40400F8DC73 /* UIColorExtension.swift */,
 				05564CDA1B3BF7E100564A4C /* HWILib.swift */,
 			);
 			path = Library;
@@ -254,6 +259,7 @@
 				05564CE71B3BF9E500564A4C /* UserManager.swift */,
 				05E45B071B3C97B5009CFD2B /* ListManager.swift */,
 				05CC7AC51B47F93900F70327 /* ModelForStoreData.swift */,
+				05D6D0AD1B5786F900F8DC73 /* TimeTableManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,6 +484,7 @@
 				05CC7AC61B47F93900F70327 /* ModelForStoreData.swift in Sources */,
 				05564CB41B3BF4B700564A4C /* AppDelegate.swift in Sources */,
 				05564D031B3C02AD00564A4C /* HTTPTask.swift in Sources */,
+				05D6D0B41B57A40400F8DC73 /* UIColorExtension.swift in Sources */,
 				059744C41B3C2A1100532554 /* Tab02MainView.swift in Sources */,
 				05564D041B3C02AD00564A4C /* HTTPUpload.swift in Sources */,
 				05E45B061B3C8E14009CFD2B /* ListCell.swift in Sources */,
@@ -488,6 +495,7 @@
 				05564CE81B3BF9E500564A4C /* UserManager.swift in Sources */,
 				05564D001B3C02AD00564A4C /* HTTPRequestSerializer.swift in Sources */,
 				05564CE51B3BF95700564A4C /* InsetTextField.swift in Sources */,
+				05D6D0AE1B5786F900F8DC73 /* TimeTableManager.swift in Sources */,
 				0560B8721B4E25A7004751C5 /* NotificationManager.swift in Sources */,
 				05E45B081B3C97B5009CFD2B /* ListManager.swift in Sources */,
 			);
@@ -629,6 +637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = EDUVance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

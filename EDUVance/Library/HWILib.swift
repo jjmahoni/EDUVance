@@ -129,4 +129,31 @@ class HWILib
         let documentDirectory = paths[0] as! String
         return documentDirectory
     }
+    
+    class func getHeightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        label.font = font
+        label.text = text
+        
+        label.sizeToFit()
+        return label.frame.height
+    }
+    
+    
+    
+    
+    class func setBoldSectionToLabel(sentenceLabel : UILabel, keyword : String)
+    {
+        let sentenceTemp = sentenceLabel.text! as NSString
+        let range = sentenceTemp.rangeOfString(keyword)
+        
+        var attributedString =  NSMutableAttributedString(string: sentenceLabel.text!)
+        
+        attributedString.setAttributes( [NSFontAttributeName : UIFont.boldSystemFontOfSize(sentenceLabel.font.pointSize)], range: range)
+        
+        sentenceLabel.attributedText = attributedString
+    }
+    
 }
