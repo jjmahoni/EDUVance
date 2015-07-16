@@ -70,7 +70,10 @@ class ListManager
         getcomminInfoList(NetworkManager.SERVER_HOST+NetworkManager.URL15_GET_JOB_INFO_LIST, keyForValue: "jobInfoList", callback: callback)
     }
     
-    
+    class func getMessageList(callback : (isSuccess : Bool, result : String)->() )
+    {
+        getcomminInfoList(NetworkManager.SERVER_HOST+NetworkManager.URL07_GET_MESSAGE_LIST, keyForValue: "messageList", callback: callback)
+    }
     
     
     
@@ -95,8 +98,17 @@ class ListManager
                         
                         if let data = json.objectForKey("data") as? NSDictionary
                         {
-                            self.totalPage =  (data.objectForKey("totalPage") as! String).toInt()!
-                            self.lastIdx =  (data.objectForKey("lastIdx") as! String).toInt()!
+                            
+                            if let totalPage = (data.objectForKey("totalPage") as? String)?.toInt()
+                            {
+                                self.totalPage = totalPage
+                            }
+                            
+                            if let lastIdx = (data.objectForKey("lastIdx") as? String)?.toInt()
+                            {
+                                self.lastIdx = lastIdx
+                            }
+                            
                             
                             if let noticeListDicArr = data.objectForKey(keyForValue) as? [NSDictionary]
                             {
@@ -159,6 +171,11 @@ class ListManager
                                     self.arrayOfStoreInfo[0].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
+                                if keyForValue == "messageList"
+                                {
+                                    self.arrayOfStoreInfo[1].lastIndexOfGetData = "\(maxIdx)"
+                                }
+                                
                                 if keyForValue == "schoolInfoList"
                                 {
                                     self.arrayOfStoreInfo[3].lastIndexOfGetData = "\(maxIdx)"
@@ -174,10 +191,14 @@ class ListManager
                                     self.arrayOfStoreInfo[5].lastIndexOfGetData = "\(maxIdx)"
                                 }
                                 
+
+                                
+                                
+                                
                                 // 파일로 현재 내역 저장
                                 self.saveDataToFile()
                                 
-                                
+                                println("일반 리스트 조회 성공적으로 JSON 파싱 완료")
                                 callback(isSuccess: true, result: "성공적으로 JSON 파싱 완료")
                             }
                             else
@@ -239,6 +260,9 @@ class ListManager
         case 0:
             keyForValue = "noticeInfo"
             
+        case 1:
+            keyForValue = "messageInfo"
+            
         case 3:
             keyForValue = "schoolInfo"
             
@@ -262,7 +286,7 @@ class ListManager
                 if resultString
                 {
                     let resultCode = json.objectForKey("resultCode") as! String
-                    println("리스트 아이템 파싱 중 결과 코드 : \(resultCode)")
+                    println("디테일 웹뷰 로드 중 결과 코드 : \(resultCode)")
                     
                     if let data = json.objectForKey("data") as? NSDictionary
                     {
@@ -325,6 +349,14 @@ class ListManager
             
         }
         
+    }
+    
+    
+    class func removeOneMessage(index : String, callback : (isSuccess : Bool , result : String)  -> ())
+    {
+        NetworkManager.deleteOneMessage(index, callback: { (isSuccess, result, jsonData) -> () in
+            callback(isSuccess: isSuccess, result: result)
+        })
     }
     
 }

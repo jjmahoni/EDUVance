@@ -12,6 +12,8 @@ import UIKit
 class Tab01MainView: BaseItemView
 {
     
+    //_______________________________________________________________________________________________________________________________________________
+    //// 시간표 1개 Cell
     class TimeCellView : UIView
     {
         func setViewWithTitle(titleOfSubject :String, subtitleOfSubject : String , startPointX : String , startPointY : String , endPointX : String , endPointY : String , widthOfOneCell : CGFloat, heightOfOneCell : CGFloat , backgroundColorString : String)
@@ -70,9 +72,13 @@ class Tab01MainView: BaseItemView
             
         }
     }
-
+    //// 시간표 1개 Cell
+    //_______________________________________________________________________________________________________________________________________________
     
 
+    
+    
+    
     var containerScrollView = UIScrollView()
     var containerViewInScroll = UIView()
     var titleLabel = UILabel()
@@ -85,6 +91,7 @@ class Tab01MainView: BaseItemView
     let heightOfTitleLabel : CGFloat = 37
     let fontSizeOfTitle : CGFloat = 13
     
+    
     // 가로 셀의 갯수
     let countOfWidthCell : CGFloat = 6
     
@@ -96,13 +103,20 @@ class Tab01MainView: BaseItemView
     let marginOfContainer : CGFloat = 4
     let heightOfFirstCell : CGFloat = 29
     
+    
+    
+    //_________________________________________________________________________________________________
+    //   이 크기를 고침에 따라 시간표 1개 셀의 세로 길이가 변한다 ------> 적당하게 값을 변경해주면 UI가 예뻐질 것이다.
     let heightOfOneCell : CGFloat = 65
+    //_________________________________________________________________________________________________
+    
+    
     
     let titleOfFirstCell = ["시간", "월요일" , "화요일", "수요일", "목요일", "금요일"]
     
 
 
-    
+    // 시간표 뷰가 보여질 때마다 호출됨
     override func onViewShow()
     {
         super.onViewShow()
@@ -112,9 +126,20 @@ class Tab01MainView: BaseItemView
         
         println("시간표 뷰가 화면에 보여짐")
         
+        
+        //  액티비티 인디케이터 표시
+        HWILib.showActivityIndicator(self.viewController!)
+        
+        
+        /// 시간표 데이터 통신에 성공함!
         TimeTableManager.getTimeTable { (isSuccess, result) -> () in
+            
+        //  액티비티 인디케이터 제거
+            HWILib.hideActivityIndicator()
+            
             if isSuccess
             {
+                
                 for oneView in self.subviews
                 {
                     (oneView as! UIView).removeFromSuperview()
@@ -123,7 +148,7 @@ class Tab01MainView: BaseItemView
                 
                 // 가로셀 크기 계산됨
                 self.widthOfOneCell = (self.frame.size.width - self.marginOfContainer*2) / self.countOfWidthCell
-
+                
                 self.containerScrollView = UIScrollView()
                 self.containerViewInScroll = UIView()
                 self.titleLabel = UILabel()
@@ -133,12 +158,12 @@ class Tab01MainView: BaseItemView
                 self.titleLabel.frame = CGRectMake(0, ConstantValues.statusBarHeight, self.frame.size.width, self.heightOfTitleLabel)
                 self.titleLabel.backgroundColor = ConstantValues.color01_white
                 self.titleLabel.text = "\(TimeTableManager.year) 학년도 제 \(TimeTableManager.semester) 학기"
-
+                self.titleLabel.textColor = UIColor.redColor()
                 self.titleLabel.font = UIFont.boldSystemFontOfSize(self.fontSizeOfTitle)
                 self.titleLabel.textAlignment = NSTextAlignment.Center
                 
                 self.addSubview(self.titleLabel)
-
+                
                 
                 
                 var yOffsetOfFirstCell = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height
@@ -149,7 +174,7 @@ class Tab01MainView: BaseItemView
                     let oneFirstCell = UILabel()
                     oneFirstCell.textAlignment = NSTextAlignment.Center
                     oneFirstCell.text = oneCellFirstTitle
-
+                    
                     oneFirstCell.textColor = ConstantValues.color02_black
                     oneFirstCell.frame = CGRectMake( CGFloat(index) * self.widthOfOneCell, yOffsetOfFirstCell, self.widthOfOneCell, self.heightOfFirstCell)
                     self.addSubview(oneFirstCell)
@@ -158,7 +183,7 @@ class Tab01MainView: BaseItemView
                 
                 
                 
-
+                
                 //스크롤뷰 크기 정하기
                 let heightOfScrollView = self.frame.size.height - ConstantValues.statusBarHeight - self.heightOfTitleLabel - 80
                 
@@ -174,11 +199,11 @@ class Tab01MainView: BaseItemView
                 self.addSubview(self.containerScrollView)
                 
                 
-
                 
-
                 
- 
+                
+                
+                
                 
                 // 첫번째 열 -> 09:00 , 10:00, 11:00 ... 출력
                 for (index, oneTime) in enumerate(TimeTableManager.timetableForm)
@@ -187,16 +212,15 @@ class Tab01MainView: BaseItemView
                     oneTimeCell.textAlignment = NSTextAlignment.Center
                     oneTimeCell.text = oneTime
                     oneTimeCell.textColor = ConstantValues.color02_black
-                    oneTimeCell.backgroundColor = ConstantValues.color_main08_93_93_93
+                    
                     oneTimeCell.frame = CGRectMake(0, (self.heightOfOneCell * CGFloat(index)), self.widthOfOneCell, self.heightOfOneCell)
                     self.containerViewInScroll.addSubview(oneTimeCell)
                 }
                 
-            
+                
                 
                 
                 // 셀들 배치
-                
                 for oneCellData in TimeTableManager.myTimetable
                 {
                     let oneTimeCellView = TimeCellView()
@@ -204,7 +228,7 @@ class Tab01MainView: BaseItemView
                     
                     self.containerViewInScroll.addSubview(oneTimeCellView)
                 }
-                
+
                 
             }
             else

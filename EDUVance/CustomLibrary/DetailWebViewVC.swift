@@ -35,17 +35,25 @@ class DetailWebViewVC: BaseVC {
         // 상단 라벨 필요
         self.topTitleLabel.text = self.topTtitleText
         
+        ListManager.commonDetailObject = CommonListItem()
         
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        HWILib.showActivityIndicator(self)
     }
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+
+        
         //상세 내용 불러오기
         ListManager.getDetailArticle(self.currentType, inputIdx: self.currentIdx) { (isSuccess, result) -> () in
-            
+            HWILib.hideActivityIndicator()
             if isSuccess
             {
                 self.hwi_title.text = ListManager.commonDetailObject.wrTitle

@@ -71,7 +71,7 @@ class LoginVC: BaseVC , UITextFieldDelegate{
         
         UserManager.sharedInstance.login(inputId, inputPw: inputPw, isAutoLogin: btn01_autoLogin.selected) { (isSuccess, message) -> () in
             
-
+            HWILib.hideActivityIndicator()
             
             // 로그인 성공시 행동 정의
             if isSuccess
@@ -80,6 +80,7 @@ class LoginVC: BaseVC , UITextFieldDelegate{
                 if appDelegate.deviceTokenIdString != ""
                 {
                     // 푸시 노티피케이션 토큰 서버로 보냄
+                    HWILib.showActivityIndicator(self)
                     NetworkManager.sendAPNSKey({ (isSuccess, result, jsonData) -> () in
                         HWILib.hideActivityIndicator()
                         self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -89,7 +90,7 @@ class LoginVC: BaseVC , UITextFieldDelegate{
                 }
                 else
                 {
-                    HWILib.hideActivityIndicator()
+
                     self.dismissViewControllerAnimated(true, completion: { () -> Void in
                         
                     })

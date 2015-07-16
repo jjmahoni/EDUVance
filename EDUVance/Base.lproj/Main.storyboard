@@ -255,9 +255,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7z-jf-BbJ" userLabel="하단 탭바뷰">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-FA-QVq">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFa-FA-QVq" userLabel="시간표">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
-                                        <state key="normal" title="학교정보">
+                                        <state key="normal" title="시간표">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -569,8 +569,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlY-jo-8xA" userLabel="컨테이너 뷰">
                                 <rect key="frame" x="0.0" y="68" width="600" height="532"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수강신청 기간안내" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLm-NY-Y7i" userLabel="메인 타이틀">
-                                        <rect key="frame" x="18" y="14" width="94" height="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLm-NY-Y7i" userLabel="메인 타이틀">
+                                        <rect key="frame" x="18" y="14" width="0.0" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="3fT-UX-XFT"/>
                                         </constraints>
@@ -579,13 +579,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_list_new" translatesAutoresizingMaskIntoConstraints="NO" id="g9W-Mq-J9S">
-                                        <rect key="frame" x="121" y="14" width="33" height="14"/>
+                                        <rect key="frame" x="27" y="14" width="33" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="Y1c-Tg-o0a"/>
                                             <constraint firstAttribute="width" constant="33" id="qTL-Ms-glt"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015.05.50 ~ 2015.12.33" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsm-wx-igx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsm-wx-igx">
                                         <rect key="frame" x="18" y="38" width="564" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="hyC-mY-aaB"/>
@@ -782,6 +782,6 @@
         <image name="loginBgOn" width="1" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="z61-VP-Wq6"/>
+        <segue reference="HQ0-lw-bMW"/>
     </inferredMetricsTieBreakers>
 </document>

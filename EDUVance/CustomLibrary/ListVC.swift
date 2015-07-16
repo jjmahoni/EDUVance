@@ -21,6 +21,7 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
         super.viewDidLoad()
         self.backBtnTemp.hidden = false
         
+        ListManager.commonList = []
         println("리스트뷰 로딩 확인")
         
         let index = find( ConstantValues.iconTitleArray , self.topTitleLabel.text! )
@@ -53,6 +54,25 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
                     self.showLoginScreen(result)
                 }
             }
+            
+            
+        case 1:
+            // 메시지 조회 네트워크 시작
+            println("메시지 조회 네트워크 시작")
+            ListManager.getMessageList { (isSuccess, result) -> () in
+                HWILib.hideActivityIndicator()
+            println("최종 콜백 받음 isSuccess : \(isSuccess)  result : \(result)")
+                if isSuccess
+                {
+                    ListManager.applyReadData(self.currentIndexOfType)
+                    self.listTableView.reloadData()
+                }
+                else
+                {
+                    self.showLoginScreen(result)
+                }
+            }
+            
         case 3:
             // 학교정보 네트워크 시작
             ListManager.getSchoolInfoList { (isSuccess, result) -> () in
@@ -253,4 +273,30 @@ class ListVC: BaseVC , UITableViewDelegate , UITableViewDataSource{
             
         })
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let selectedItem = ListManager.commonList[indexPath.row]
+        
+        HWILib.showActivityIndicator(self)
+        ListManager.removeOneMessage(selectedItem.idx!, callback: { (isSuccess, result) -> () in
+            HWILib.hideActivityIndicator()
+            self.viewDidAppear(true)
+
+        })
+    }
+    
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if self.currentIndexOfType == 1
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
 }

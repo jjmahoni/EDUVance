@@ -25,15 +25,15 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     
     var iconsArray : [IconView] = []
     
-//    var isViewDidLoad = false
+    //    var isViewDidLoad = false
     
     override func drawRect(rect: CGRect)
     {
         super.drawRect(rect)
-
+        
     }
-
-
+    
+    
     
     
     override func onViewLoad()
@@ -47,11 +47,11 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     override func onViewShow()
     {
         super.onViewShow()
+        // 액티비티 인디케이터 표시
+        HWILib.showActivityIndicator(self.viewController!)
+        
         
         println("2번 페이지의 뷰가 보여질 때")
-
-
-        
         
         var noticeIdx = ""
         var message = ""
@@ -64,7 +64,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         // 파일로 저장된 읽은목록 데이터를 가져옴
         ListManager.getStoredListData()
-
+        
         
         // 파일에서 가져온 데이터를 파라미터로 복사 --> 만약 저장된 파일이 없을 경우 해당 배열은 사이즈가 0이므로 건너뜀
         if ListManager.arrayOfStoreInfo.count != 0
@@ -76,14 +76,13 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
             }
         }
         
-        // 액티비티 인디케이터 표시 및 배지카운트 조회
-//        HWILib.showActivityIndicator(self.viewController!)
-        
 
+        
+        
         
         NetworkManager.getMainMenuBadgeCount(params[0], scheduleIdx: params[2], schoolInfoIdx: params[3], lifeInfoIdx: params[4], jobInfoIdx: params[5]) { (isSuccess, result, jsonData) -> () in
             
-//            HWILib.hideActivityIndicator()
+            HWILib.hideActivityIndicator()
             
             if !isSuccess
             {
@@ -176,8 +175,21 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     {
         println("아이콘 뷰 터치 감지 ---> 인덱스 : \(index)")
         
-        // 일반적인 리스트 화면으로 이동 (공지사항, 학교정보, 생활정보, 취업정보)
-        self.viewController?.performSegueWithIdentifier("main_list", sender: ConstantValues.iconTitleArray[index])
+        if index == 2
+        {
+            println("학사 일정 터치 확인")
+        }
+        else if index == 6
+        {
+            println("환경설정 터치 확인")
+        }
+        else
+        {
+            // 일반적인 리스트 화면으로 이동 (공지사항, 쪽지, 학교정보, 생활정보, 취업정보)
+            self.viewController?.performSegueWithIdentifier("main_list", sender: ConstantValues.iconTitleArray[index])
+        }
+        
+        
     }
     
     
@@ -197,11 +209,11 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         self.backgroundColor = UIColor.clearColor()
         
         
-        mainScrollView.backgroundColor = UIColor.clearColor()
+        self.mainScrollView.backgroundColor = UIColor.clearColor()
         // 메인 스크롤뷰 프레임 결정
-        mainScrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
-
-
+        self.mainScrollView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)
+        
+        
         
         // 아이콘들 배열 생성
         self.iconsArray = [
@@ -232,7 +244,7 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         
         
         
-        subContainerView.frame = CGRectMake(marginOfWidth, marginOfHeight, widthOfSubContainerView, heightOfSubContainerView )
+        self.subContainerView.frame = CGRectMake(marginOfWidth, marginOfHeight, widthOfSubContainerView, heightOfSubContainerView )
         
         
         for (index, oneIconView) in enumerate(self.iconsArray)
@@ -241,25 +253,26 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
         }
         
         
-        mainContainerView.frame = CGRectMake(0, 0, self.frame.size.width, heightOfSubContainerView + marginOfHeight)
-        mainContainerView.backgroundColor = UIColor.clearColor()
-        mainContainerView.addSubview(self.subContainerView)
+        self.mainContainerView.frame = CGRectMake(0, 0, self.frame.size.width, heightOfSubContainerView + marginOfHeight)
+        self.mainContainerView.backgroundColor = UIColor.clearColor()
+        self.mainContainerView.addSubview(self.subContainerView)
         
         
-
+        
         
         // 현재 뷰에 스크롤뷰와 컨테이너 뷰 삽입
-        mainScrollView.addSubview(mainContainerView)
+        self.mainScrollView.addSubview(self.mainContainerView)
         
         
-        self.addSubview(mainScrollView)
+        self.addSubview(self.mainScrollView)
         
-
+        
         
         // 스크롤뷰 컨텐츠 사이즈 결정
-        mainScrollView.contentSize = mainContainerView.frame.size
+        self.mainScrollView.contentSize = self.mainContainerView.frame.size
         
-
+        
+        
         
     }
     
@@ -289,5 +302,5 @@ class Tab02MainView: BaseItemView ,IconBtnProtocol
     }
     
     
-
+    
 }

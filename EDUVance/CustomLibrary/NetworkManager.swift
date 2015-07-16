@@ -15,16 +15,14 @@ class NetworkManager
     
     static let URL01_LOGIN : String = "/app/user/login.php"
     static let URL01_01_SEND_DEVICE_TOKEN : String = "/app/user/save_user_info.php"
-    
     static let URL02_GET_MAIN_MENU : String  = "/app/community/information.php"
-    
     static let URL03_GET_NOTICE_LIST : String  = "/app/community/notice_list.php"
-
     static let URL04_GET_DETAIL_NOTICE : String  = "/app/community/notice_detail.php"
-    
-    
+    static let URL07_GET_MESSAGE_LIST : String  = "/app/community/message_list.php"
+    static let URL07_01_DELETE_MESSAGE : String  = "/app/community/delete_message.php"
+    static let URL08_GET_DETAIL_MESSAGE : String  = "/app/community/message_detail.php"
+    static let URL09_GET_SCHEDULE : String  = "/app/community/schedule.php"
     static let URL10_GET_TIME_TABLE : String  = "/app/lecture/class_schedule.php"
-    
     static let URL11_GET_SCHOOL_INFO_LIST : String  = "/app/community/school_info_list.php"
     static let URL12_GET_DETAIL_SCHOOL_INFO : String  = "/app/community/school_info_detail.php"
     static let URL13_GET_LIFE_INFO_LIST : String  = "/app/community/life_info_list.php"
@@ -230,6 +228,11 @@ class NetworkManager
         case 0:
             println("공지사항 입니다.")
             urlForWebView = NetworkManager.URL04_GET_DETAIL_NOTICE
+            
+        case 1:
+            println("쪽지 입니다.")
+            urlForWebView = NetworkManager.URL08_GET_DETAIL_MESSAGE
+            
         case 3:
             println("학교정보 입니다.")
             urlForWebView = NetworkManager.URL12_GET_DETAIL_SCHOOL_INFO
@@ -323,10 +326,55 @@ class NetworkManager
                     callback(isSuccess: true, result: "성공적으로 시간표 데이터 가져옴", jsonData: data)
                     
                 }
-                
             })
         }
-   
     }
+    
+    
+    class func deleteOneMessage(index : String, callback :( isSuccess : Bool, result : String, jsonData : NSData?)->())
+    {
+        
+            if !HWILib.isConnectedToNetwork()
+            {
+                callback(isSuccess: false, result: "인터넷연결안됨", jsonData: nil)
+                return
+            }
+            
+            var request = HTTPTask()
+            
+            let params : Dictionary<String, AnyObject> = [
+                "userId" : UserManager.currentUser!.userId! ,
+                "accessToken" : UserManager.currentUser!.accessToken!,
+                "idxList" : index
+                
+            ]
+            
+            
+            request.POST( SERVER_HOST + URL07_01_DELETE_MESSAGE , parameters: params) { (response : HTTPResponse) -> Void in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    if let err = response.error
+                    {
+                        callback(isSuccess: false, result: "네트워크 에러입니다.", jsonData: nil)
+                        return
+                    }
+                    
+                    if let data = response.responseObject as? NSData
+                    {
+                        let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                        println("쪽지 삭제 디버그 스트링 : \(str)")
+                        
+                        callback(isSuccess: true, result: "성공적으로 쪽지 삭제 네트워크", jsonData: data)
+                        
+                    }
+                })
+            }
+        
+        
+        
+    }
+    
+    
+    
     
 }

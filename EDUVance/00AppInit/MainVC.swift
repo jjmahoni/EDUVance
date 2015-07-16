@@ -74,17 +74,29 @@ class MainVC: BaseVC , UIScrollViewDelegate{
         super.viewDidAppear(animated)
 
         
+        
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if UserManager.currentUser == nil
         {
             self.performSegueWithIdentifier("main_login_seg", sender: self)
         }
         else
         {
+            
+            println("액세스 토큰 로그 : \(UserManager.currentUser?.accessToken!)")
             // 처음 앱 실행 시 2번 탭으로 시작함
             if isFirstLoad
             {
-                self.changeTabWithIndex(1  , wantAnimation : false)
-                self.isFirstLoad = false
+                HWILib.delay(0.1, closure: { () -> () in
+                    self.changeTabWithIndex(1  , wantAnimation : false)
+                    self.isFirstLoad = false
+                })
+
             }
             else
             {
@@ -93,9 +105,8 @@ class MainVC: BaseVC , UIScrollViewDelegate{
             }
             
         }
-        
+
     }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
